@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-family: var(--font-g-medium);
+}
+
+.logo {
+    position: relative;
+    width: 160px;
+    aspect-ratio: 3.47;
+}
+
+.scrolled .logo {
+    width: 120px;
+}

@@ -1,0 +1,21 @@
+.nav {
+    margin: 0 auto;
+    width: fit-content;
+    display: flex;
+    gap: 12px;
+    transform: translateY(-50%);
+    button {
+        background-color: #fff;
+        padding: 6px 16px;
+        border-radius: 4px;
+        font-size: 16px;
+        border: 1px solid #fff;
+        transition: border-color 0.3s ease, color 0.3s ease;
+        &:hover {
+            color: var(--color-blue);
+        }
+        &[data-active="true"] {
+            color: var(--color-blue);
+        }
+    }
+}

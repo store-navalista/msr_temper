@@ -1,0 +1,99 @@
+{
+    "Global": {
+        "siteName": "Mediterranean Shipping Register"
+    },
+    "HOME": {
+        "title": "Home",
+        "description": "Management. Survey. Registration. Classification."
+    },
+    "ABOUT": {
+        "title": "About Us",
+        "description": "Learn more about our mission, vision, and long-standing tradition in maritime classification and inspection."
+    },
+    "CONTACTS": {
+        "title": "Our Contacts",
+        "description": "Contact us via phone, email, or visit our offices worldwide for any inquiries or assistance."
+    },
+    "NEWS": {
+        "title": "News",
+        "description": "Stay updated with the latest developments, regulatory changes, and company announcements."
+    },
+    "CLIENT": {
+        "title": "For Clients",
+        "description": "Access resources, services, and dedicated support tailored for shipowners, managers, and operators."
+    },
+    "INFO": {
+        "title": "Information",
+        "description": "Technical, legal, and regulatory information essential for maritime professionals and organizations."
+    },
+    "CLASS_SERV": {
+        "title": "Classification Services",
+        "description": "Ship classification services based on international standards, ensuring safety, reliability, and compliance."
+    },
+    "TRANSF": {
+        "title": "Transfer of Class",
+        "description": ""
+    },
+    "SURVEYS": {
+        "title": "Surveys",
+        "description": "Comprehensive surveys throughout the ship's lifecycle to assess condition, safety, and compliance."
+    },
+
+    "TYPE_APPROVAL": {
+        "title": "Type Approval",
+        "description": ""
+    },
+    "STATE_COMP": {
+        "title": "Statement of Compliance",
+        "description": ""
+    },
+    "SERV_SUP": {
+        "title": "Service Supplier",
+        "description": ""
+    },
+    "REM_AU": {
+        "title": "Remote Audit",
+        "description": ""
+    },
+    "CONV_AU": {
+        "title": "Conventional Audit",
+        "description": ""
+    },
+
+    "STAT_SURV": {
+        "title": "Statutory Surveys",
+        "description": ""
+    },
+    "TOW_SURV": {
+        "title": "Towage Survey",
+        "description": ""
+    },
+    "OTHER_SURV": {
+        "title": "Other Surveys",
+        "description": ""
+    },
+    "AT_SHIP": {
+        "title": "Technical Supervision at Shipyard",
+        "description": ""
+    },
+    "IN_IND": {
+        "title": "Technical Supervision in Industry",
+        "description": ""
+    },
+    "OTHER_SERVICES": {
+        "title": "Other Services",
+        "description": ""
+    },
+    "ADV_CONS": {
+        "title": "Advisory and Consulting",
+        "description": ""
+    },
+    "CLIENT_VERIFY": {
+        "title": "Verify Certificate",
+        "description": ""
+    },
+    "CLIENT_CABINET": {
+        "title": "Client Cabinet",
+        "description": ""
+    }
+}

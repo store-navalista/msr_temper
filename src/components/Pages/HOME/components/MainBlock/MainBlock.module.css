@@ -1,0 +1,39 @@
+.main_block {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    background-image: url(/images/pages/HOME/bg.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .dark_curtain {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+    &:hover .dark_curtain {
+        opacity: 1;
+    }
+    & :where(h1, p, a) {
+        position: relative;
+        z-index: 1;
+        color: #fff;
+    }
+    h1 {
+        font-size: 48px;
+        margin-bottom: 24px;
+    }
+    p {
+        line-height: 1.3;
+        font-size: 22px;
+        margin-bottom: 24px;
+    }
+}

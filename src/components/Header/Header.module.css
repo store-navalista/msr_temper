@@ -1,0 +1,27 @@
+.header,
+.scrolled_header {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 20px;
+    max-width: 1980px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    background-color: #fff;
+}
+.header_wrapper {
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: #fff;
+    .scrolled_header {
+        padding: 12px 20px;
+    }
+    box-shadow: 0 0 4px #33333345;
+}

@@ -1,0 +1,68 @@
+.services {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(/images/svg/brick-bg.svg);
+    background-position: center bottom;
+    background-size: 2%;
+    .block {
+        display: flex;
+        justify-content: center;
+        gap: 48px;
+        width: 100%;
+        padding-top: 128px;
+        &:last-child {
+            padding-bottom: 128px;
+        }
+        .image {
+            position: relative;
+            width: 500px;
+            height: 300px;
+            border-radius: 8px;
+            border: 2px solid #fff;
+            overflow: hidden;
+            box-shadow: 0 0 4px #00000070;
+        }
+
+        .service {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: fit-content;
+
+            .custom_btn {
+                width: 150px;
+                height: 40px;
+                margin-top: 24px;
+            }
+
+            h3,
+            p {
+                padding: 8px;
+                width: 100%;
+                max-width: 500px;
+                text-align: left;
+            }
+
+            h3 {
+                font-size: 32px;
+                padding: 12px;
+            }
+
+            p {
+                line-height: 1.3;
+            }
+        }
+
+        &:nth-child(odd) {
+            flex-direction: row-reverse;
+            .service {
+                align-items: flex-end;
+                h3,
+                p {
+                    text-align: right;
+                }
+            }
+        }
+    }
+}
