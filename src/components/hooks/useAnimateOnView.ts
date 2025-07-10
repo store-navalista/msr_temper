@@ -1,5 +1,6 @@
 import { useInView } from "react-intersection-observer";
 import { useMemo } from "react";
+import { easeOut } from "framer-motion";
 
 type Direction = "left" | "right" | "top" | "bottom" | "none";
 
@@ -20,19 +21,20 @@ export const useAnimateOnView = (direction: Direction = "bottom", delay = 0, thr
                     return { y: -50 };
                 case "bottom":
                     return { y: 50 };
-                case "none":
-                    return { x: 0, y: 0 };
                 default:
-                    return { x: 0, y: 0 };
+                    return {};
             }
         };
 
         return {
             initial: { opacity: 0, ...getOffset() },
             animate: inView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, ...getOffset() },
-            transition: { duration, delay, ease: "easeOut" },
+            transition: { duration, delay, ease: easeOut },
         };
     }, [inView, direction, duration, delay]);
 
-    return { ref: ref as React.Ref<HTMLDivElement>, animation };
+    return {
+        ref: ref as React.Ref<HTMLDivElement>,
+        animation,
+    };
 };
