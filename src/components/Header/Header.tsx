@@ -1,9 +1,9 @@
+import { motion } from "framer-motion";
+import { useAnimateOnView } from "../hooks/useAnimateOnView";
+import { useScrollStep } from "../hooks/useScrollStep";
 import { Logo } from "./components/Logo/Logo";
 import { Navigation } from "./components/Navigation/Navigation";
 import css from "./Header.module.css";
-import { useScrollStep } from "../hooks/useScrollStep";
-import { useAnimateOnView } from "../hooks/useAnimateOnView";
-import { motion } from "framer-motion";
 
 export const Header = () => {
     const scrollStep = useScrollStep();

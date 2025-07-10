@@ -34,5 +34,5 @@ export const useAnimateOnView = (direction: Direction = "bottom", delay = 0, thr
         };
     }, [inView, direction, duration, delay]);
 
-    return { ref, animation };
+    return { ref: ref as React.Ref<HTMLDivElement>, animation };
 };
