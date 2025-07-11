@@ -1,16 +1,18 @@
 "use client";
 
-import { FC, ReactNode, useEffect } from "react";
+import store from "@/store/store";
+import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+import { FC, ReactNode, useEffect } from "react";
+import { Provider } from "react-redux";
 import Footer from "../Footer/Footer";
 import { Header } from "../Header/Header";
 import { NewsBlock } from "../Pages/components/NewsBlock/NewsBlock";
+import { ScrollUpButton } from "../ScrollUpButton/ScrollUpButton";
+import { useScrollStep } from "../hooks/useScrollStep";
 import css from "./PageLayout.module.css";
-
-import "nprogress/nprogress.css";
-import { Provider } from "react-redux";
-import store from "@/store/store";
 
 type PageLayoutProps = {
     children: ReactNode;
@@ -23,6 +25,7 @@ NProgress.configure({
 });
 
 export const PageLayout: FC<PageLayoutProps> = ({ children }) => {
+    const scrollStep = useScrollStep();
     const pathname = usePathname();
 
     useEffect(() => {
@@ -44,6 +47,13 @@ export const PageLayout: FC<PageLayoutProps> = ({ children }) => {
             <div className={css.page_layout}>
                 <Header />
                 {children}
+                <AnimatePresence>
+                    {scrollStep > 0 && (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2, ease: "easeOut" }}>
+                            <ScrollUpButton />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
                 <NewsBlock />
                 <Footer />
             </div>

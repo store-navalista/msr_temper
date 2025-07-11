@@ -95,6 +95,10 @@
                 }
             }
         }
+        .single_link {
+            display: flex;
+            gap: 6px;
+        }
     }
     ul.dropdown {
         display: flex;

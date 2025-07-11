@@ -7,7 +7,7 @@ import css from "../Navigation.module.css";
 
 export type PageIDType = keyof typeof Content.MenuItems;
 
-const LinkItem: FC<{ page_id: keyof typeof Content.MenuItems; size: "xs" | "xl" }> = ({ page_id, size }) => {
+export const LinkItem: FC<{ page_id: keyof typeof Content.MenuItems; size: "xs" | "xl" }> = ({ page_id, size }) => {
     return (
         <li data-size={size}>
             <span className={css.dot} />

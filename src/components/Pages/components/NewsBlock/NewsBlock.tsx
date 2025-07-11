@@ -1,5 +1,5 @@
 import news from "@/content/news.json" assert { type: "json" };
-import React, { useState } from "react";
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import css from "./NewsBlock.module.css";
 
@@ -12,31 +12,31 @@ import { Pagination } from "swiper/modules";
 
 export const NewsBlock = () => {
     const filteredNews = news.slice(-7).reverse();
-    const [isDescriptionVisible, setisDescriptionVisible] = useState(true);
+    // const [isDescriptionVisible, setisDescriptionVisible] = useState(true);
 
     return (
         <div className={css.news}>
             <h2>News</h2>
             <Swiper
                 spaceBetween={30}
-                centeredSlides={true}
+                // centeredSlides={true}
                 slidesPerView="auto"
                 pagination={{
                     clickable: true,
                 }}
                 modules={[Pagination]}
                 className={css.swiper}
-                onSlideChange={(swiper) => {
-                    if (swiper.activeIndex === 0) {
-                        setisDescriptionVisible(true);
-                    } else {
-                        setisDescriptionVisible(false);
-                    }
-                }}
+                // onSlideChange={(swiper) => {
+                //     if (swiper.activeIndex === 0) {
+                //         setisDescriptionVisible(true);
+                //     } else {
+                //         setisDescriptionVisible(false);
+                //     }
+                // }}
             >
-                <p style={{ opacity: isDescriptionVisible ? 1 : 0 }} className={css.description}>
+                {/* <p style={{ opacity: isDescriptionVisible ? 1 : 0 }} className={css.description}>
                     Stay updated with the latest developments regulatory changes and company announcements.
-                </p>
+                </p> */}
                 {filteredNews.map((item, index) => {
                     const { id, title, time } = item;
 

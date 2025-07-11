@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FC } from "react";
 import css from "../Navigation.module.css";
 
-export const AnimatedIcon: FC<{ page_id: "COMPANY" | "NEWS" | "SERVICES" }> = ({ page_id }) => {
+export const AnimatedIcon: FC<{ page_id: "COMPANY" | "NEWS" | "SERVICES" | "CLIENT" }> = ({ page_id }) => {
     switch (page_id) {
         case "COMPANY":
             return (
@@ -15,6 +15,13 @@ export const AnimatedIcon: FC<{ page_id: "COMPANY" | "NEWS" | "SERVICES" }> = ({
             return (
                 <div className={css.icon}>
                     <Image src="/images/svg/news.svg" fill alt="dropdown button" />
+                    <Image src="/images/svg/find.svg" fill alt="dropdown button" />
+                </div>
+            );
+        case "CLIENT":
+            return (
+                <div className={css.icon}>
+                    <Image src="/images/svg/client-support.svg" fill alt="dropdown button" />
                     <Image src="/images/svg/find.svg" fill alt="dropdown button" />
                 </div>
             );
