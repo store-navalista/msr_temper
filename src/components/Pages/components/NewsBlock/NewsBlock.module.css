@@ -3,6 +3,9 @@
     width: 100%;
     padding: 64px 16px;
     box-sizing: border-box;
+    @media screen and (max-width: 768px) {
+        padding: 48px 0;
+    }
     h2 {
         font-size: 32px;
         margin-bottom: 24px;
@@ -13,6 +16,9 @@
         border-right: 1px solid #333;
         padding: 24px;
         --swiper-pagination-bottom: 0;
+        @media screen and (max-width: 768px) {
+            border: none;
+        }
         .description {
             position: absolute;
             top: 50%;
@@ -41,6 +47,9 @@
             align-items: flex-end;
             text-align: center;
             line-height: 1.3;
+            @media screen and (max-width: 768px) {
+                width: 240px;
+            }
             .image {
                 position: absolute;
                 width: 100%;
@@ -67,6 +76,9 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    @media screen and (max-width: 768px) {
+                        font-size: 16px;
+                    }
                 }
                 .time {
                     font-size: 14px;

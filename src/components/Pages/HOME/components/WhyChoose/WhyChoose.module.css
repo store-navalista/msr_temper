@@ -54,5 +54,40 @@
                 }
             }
         }
+        @media screen and (max-width: 1400px) {
+            flex-direction: column;
+            align-items: center;
+            .desc {
+                margin-top: 0;
+            }
+        }
+        @media screen and (max-width: 1200px) {
+            .blocks {
+                display: flex;
+                flex-direction: column;
+                .block {
+                    max-width: 500px;
+                }
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .desc {
+                width: 100%;
+                p,
+                h2 {
+                    text-align: center;
+                    margin: 0 auto;
+                }
+                h2 {
+                    font-size: 24px;
+                }
+                p {
+                    width: 100%;
+                }
+            }
+        }
+    }
+    @media screen and (max-width: 1200px) {
+        padding: 64px 24px;
     }
 }
