@@ -1,5 +1,6 @@
 import { generatePageMetadata } from "@/services/seo";
 import { ClientCabinet } from "@/components/Pages/CLIENT/CLIENT_CABINET/ClientCabinet";
+import { Suspense } from "react";
 
 const page_ID = "CLIENT";
 
@@ -11,5 +12,9 @@ export async function generateMetadata() {
 }
 
 export default function IndexPage() {
-    return <ClientCabinet />;
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ClientCabinet />;
+        </Suspense>
+    );
 }
