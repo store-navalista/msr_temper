@@ -17,6 +17,7 @@ export const NewsBlock = () => {
     return (
         <div className={css.news}>
             <h2>News</h2>
+            <p className={css.description}>Stay updated with the latest developments regulatory changes and company announcements.</p>
             <Swiper
                 spaceBetween={30}
                 // centeredSlides={true}

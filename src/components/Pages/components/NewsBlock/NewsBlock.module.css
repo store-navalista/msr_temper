@@ -10,6 +10,14 @@
         font-size: 32px;
         margin-bottom: 24px;
     }
+    .description {
+        text-wrap: balance;
+        font-size: 20px;
+        max-width: 500px;
+        text-align: center;
+        line-height: 1.4;
+        margin: 0 auto;
+    }
     .swiper {
         box-sizing: border-box;
         border-left: 1px solid #333;
@@ -18,18 +26,6 @@
         --swiper-pagination-bottom: 0;
         @media screen and (max-width: 768px) {
             border: none;
-        }
-        .description {
-            position: absolute;
-            top: 50%;
-            text-wrap: balance;
-            font-size: 28px;
-            max-width: 320px;
-            text-align: right;
-            line-height: 1.4;
-            transform: translateY(-50%);
-            left: clamp(50px, calc(-541.18px + 1261.18 * (100vw / 2560)), 720px);
-            transition: opacity 0.2s;
         }
         .slide {
             position: relative;
