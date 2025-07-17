@@ -2,7 +2,7 @@
 
 import Content from "@/content/en.json" assert { type: "json" };
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Auth } from "./Auth/Auth";
 import css from "./ClientCabinet.module.css";
 import { FlyCircles } from "./components/Effects/FlyCircles/FlyCircles";
@@ -31,17 +31,19 @@ export const ClientCabinet = () => {
     }, [searchParams]);
 
     return (
-        <div className={css.cabinet}>
-            {!Object.keys(queryParams).length ? (
-                <Auth />
-            ) : (
-                <>
-                    <Header />
-                    <Navigation {...{ activeTab, setActiveTab }} />
-                    <FlyCircles />
-                    <Tabs {...{ activeTab }} />
-                </>
-            )}
-        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+            <div className={css.cabinet}>
+                {!Object.keys(queryParams).length ? (
+                    <Auth />
+                ) : (
+                    <>
+                        <Header />
+                        <Navigation {...{ activeTab, setActiveTab }} />
+                        <FlyCircles />
+                        <Tabs {...{ activeTab }} />
+                    </>
+                )}
+            </div>
+        </Suspense>
     );
 };
