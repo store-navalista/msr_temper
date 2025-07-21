@@ -1,2 +1,9 @@
 .cabinet {
+    .company {
+        margin: 0 auto;
+        width: fit-content;
+        font-size: 20px;
+        padding: 8px;
+        text-decoration: underline;
+    }
 }

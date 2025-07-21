@@ -1,4 +1,4 @@
-import { AltMail, Arrow, Instagram, Linkedin, Login, Mail, Password, Phone, Whatsup } from "./SVGs";
+import { Address, AltMail, Arrow, IMO, Instagram, Linkedin, Login, Mail, Password, Phone, Whatsup, WordDoc } from "./SVGs";
 
 export const SVG = {
     Arrow,
@@ -10,4 +10,7 @@ export const SVG = {
     AltMail,
     Password,
     Login,
+    Address,
+    IMO,
+    WordDoc,
 };

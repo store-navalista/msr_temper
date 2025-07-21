@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Auth } from "./Auth/Auth";
 import css from "./ClientCabinet.module.css";
-import { FlyCircles } from "./components/Effects/FlyCircles/FlyCircles";
+// import { FlyCircles } from "./components/Effects/FlyCircles/FlyCircles";
 import { Header } from "./components/Header";
 import { Navigation } from "./components/Navigation";
 import { Tabs } from "./components/Tabs/Tabs";
@@ -15,7 +15,7 @@ export type TabsType = keyof typeof Content.CLIENT.Cabinet.navigation;
 export const ClientCabinet = () => {
     const searchParams = useSearchParams();
     const [queryParams, setQueryParams] = useState<Record<string, string>>({});
-    const [activeTab, setActiveTab] = useState<TabsType>("dashboard");
+    const [activeTab, setActiveTab] = useState<TabsType>("basic");
 
     useEffect(() => {
         const params: Record<string, string> = {};
@@ -38,7 +38,8 @@ export const ClientCabinet = () => {
                 <>
                     <Header />
                     <Navigation {...{ activeTab, setActiveTab }} />
-                    <FlyCircles />
+                    <p className={css.company}>A.P. Moller-Maersk Group (Maersk)</p>
+                    {/* <FlyCircles /> */}
                     <Tabs {...{ activeTab }} />
                 </>
             )}

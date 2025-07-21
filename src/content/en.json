@@ -65,14 +65,12 @@
             "view_cert": "View E-Certificate"
         },
         "Cabinet": {
-            "h1": "Marine Survey Register (MSR)",
+            "h1": "Marine Survey Register",
             "description": "Client Portal",
             "navigation": {
-                "dashboard": "Dashboard",
-                "fleet": "Fleet",
-                "certificates": "Certificates",
-                "surveys": "Surveys",
-                "support": "Support"
+                "basic": "Company's basic information",
+                "fleet": "Company's vessels",
+                "online_app": "Online application"
             }
         }
     },
