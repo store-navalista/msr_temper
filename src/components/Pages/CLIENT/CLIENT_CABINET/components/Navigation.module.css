@@ -3,7 +3,7 @@
     width: fit-content;
     display: flex;
     gap: 12px;
-    transform: translateY(-50%);
+    transform: translateY(4px);
     button {
         background-color: #fff;
         padding: 6px 16px;

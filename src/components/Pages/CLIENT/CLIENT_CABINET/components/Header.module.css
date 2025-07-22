@@ -1,7 +1,7 @@
 .header {
     position: relative;
     color: #fff;
-    padding: 48px 0 96px 0;
+    padding: 48px 0 64px 0;
     .block {
         display: flex;
         flex-direction: column;

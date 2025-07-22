@@ -6,9 +6,8 @@ export const Header = () => {
     return (
         <div className={css.header}>
             <div className={css.block}>
-                <Wave waveHeightScale={0.9} height={206} />
-                <h1>{Content.CLIENT.Cabinet.h1}</h1>
-                <p>{Content.CLIENT.Cabinet.description}</p>
+                <Wave waveHeightScale={0.9} height={160} />
+                <h1>{Content.CLIENT.Cabinet.description}</h1>
             </div>
         </div>
     );
