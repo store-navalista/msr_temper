@@ -15,7 +15,7 @@ export const Vessels = () => {
             <div className={css.header}>
                 <p>Vessel Name</p>
                 <p>IMO</p>
-                <p>Vessels Type</p>
+                <p>Vessels</p>
                 <p>Flag</p>
                 <p>Port of Registry</p>
                 <p>Review</p>
