@@ -3,6 +3,7 @@
 import { UI } from "@/components/UI";
 import css from "../Tabs.module.css";
 import { SVG } from "@/components/SVG";
+// import ElmaForm from "./ElmaForm";
 
 export const Online = () => {
     const downloadFile = () => {
@@ -22,6 +23,7 @@ export const Online = () => {
             <UI.Button onClick={downloadFile} colorScheme="secondary" className={css.button}>
                 <SVG.WordDoc className={css.icon} /> Download request form
             </UI.Button>
+            {/* <ElmaForm /> */}
         </div>
     );
 };

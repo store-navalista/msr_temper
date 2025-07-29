@@ -7,9 +7,6 @@ const data = [
     { vessel_name: "Vostok", imo: "9876544", type: "Tanker", flag: "Trinidad and Tobago", port: "Aasiaat" },
     { vessel_name: "Bering Sea", imo: "9876545", type: "Container", flag: "Uruguay", port: "Jakobshavn" },
     { vessel_name: "Polyarnik", imo: "9876546", type: "Icebreaker", flag: "Mongolia", port: "Sukkertoppen" },
-    { vessel_name: "-", imo: "-", type: "-", flag: "-", port: "-" },
-    { vessel_name: "-", imo: "-", type: "-", flag: "-", port: "-" },
-    { vessel_name: "-", imo: "-", type: "-", flag: "-", port: "-" },
 ];
 
 export const Vessels = () => {
@@ -25,7 +22,6 @@ export const Vessels = () => {
             </div>
             {data.map((ship, index) => {
                 const keys = Object.keys(ship) as Array<keyof typeof ship>;
-                const isEmpty = Object.values(ship).every((val) => val === "-");
 
                 return (
                     <div key={index} className={css.row}>
@@ -33,13 +29,9 @@ export const Vessels = () => {
                             return <p key={`${v}` + i}>{ship[v]}</p>;
                         })}
                         <div className={css.buttons}>
-                            {!isEmpty ? (
-                                <div>
-                                    <button className={css.button}>Generate status report</button>
-                                </div>
-                            ) : (
-                                "-"
-                            )}
+                            <div>
+                                <button className={css.button}>Generate status report</button>
+                            </div>
                         </div>
                     </div>
                 );
