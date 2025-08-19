@@ -6,4 +6,5 @@ export type CertificateResponse = {
     issue_date: string;
     signed_file: string;
     vessel: string;
+    expiry_date: string;
 };

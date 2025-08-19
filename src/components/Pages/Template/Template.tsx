@@ -1,13 +1,15 @@
 import { RoutesTypes } from "@/constants/routes";
 import { mdx_extractor } from "@/services/mdx_extractor";
+import clsx from "clsx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Image from "next/image";
 import React, { FC } from "react";
 import css from "./Template.module.css";
 
 type TemplateProps = {
-    page_ID: RoutesTypes;
+    page_ID: RoutesTypes | string;
     type?: "with_content" | "without_content";
+    templateType?: "info" | "news";
     children?: React.ReactNode;
 };
 
@@ -24,8 +26,8 @@ const Content: FC<ContentProps> = ({ content, type, children }) => {
     }
 };
 
-export const Template: FC<TemplateProps> = ({ page_ID, type = "with_content", children }) => {
-    const content = mdx_extractor(page_ID);
+export const Template: FC<TemplateProps> = ({ page_ID, type = "with_content", templateType = "info", children }) => {
+    const content = mdx_extractor(page_ID, templateType);
 
     return (
         <div className={css.template}>
@@ -34,7 +36,7 @@ export const Template: FC<TemplateProps> = ({ page_ID, type = "with_content", ch
                 <div className={css.white_brick} />
                 <Image src={`/images/pages/template/intlreg_excellence.jpg`} fill alt="service" style={{ objectFit: "cover" }} />
             </div>
-            <div className={css.mdx}>
+            <div className={clsx(templateType === "news" ? css.news_mdx : css.mdx)}>
                 <Content {...{ content, type, children }} />
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import css from "./Button.module.css";
-import Link from "next/link";
 import clsx from "clsx";
+import { SmartLink } from "@/components/Pages/SmartLink/SmartLink";
 
 type ButtonProps = {
     children: React.ReactNode;
@@ -51,9 +51,9 @@ export const Button: FC<ButtonProps> = ({ children, colorScheme = "primary", var
         case "link":
             return (
                 <div className={combinedClassName}>
-                    <Link style={{ ...getColorScheme(), ...args.style }} href={href}>
+                    <SmartLink style={{ ...getColorScheme(), ...args.style }} href={href}>
                         {children}
-                    </Link>
+                    </SmartLink>
                 </div>
             );
         case "submit":

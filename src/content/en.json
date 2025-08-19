@@ -43,7 +43,7 @@
         "title": "Something went wrong!"
     },
     "CLIENT": {
-        "heading": "Client Support Portal",
+        "heading": "Client Portal",
         "description": "Access tools and resources to support your interaction with our services.",
         "verify_desc": "On this page you can verify the certificate:",
         "verify_link": "Verify Certificate",
@@ -56,13 +56,16 @@
         "Info_block": {
             "verified": "Verified!",
             "verified_desc": "This is a verified document",
+            "not_verified": "Not verified",
+            "not_verified_desc": "This document is not verified",
             "vessel": "Vessel",
             "imo_number": "IMO Number",
             "certificate_number": "Certificate Number",
             "certificate_name": "Certificate Name",
             "certificate_status": "Certificate Status",
             "issue_date": "Issue Date",
-            "view_cert": "View E-Certificate"
+            "view_cert": "View E-Certificate",
+            "expiry_date": "Valid To"
         },
         "Cabinet": {
             "h1": "Marine Survey Register",

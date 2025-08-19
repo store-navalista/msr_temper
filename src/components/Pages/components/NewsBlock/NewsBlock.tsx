@@ -1,17 +1,16 @@
-import news from "@/content/news.json" assert { type: "json" };
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import css from "./NewsBlock.module.css";
-
+import NewsData from "@/content/news.json" assert { type: "json" };
 import { UI } from "@/components/UI";
 import Image from "next/image";
-import Link from "next/link";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
+import { SmartLink } from "../../SmartLink/SmartLink";
 
 export const NewsBlock = () => {
-    const filteredNews = news.slice(-7).reverse();
+    const filteredNews = NewsData.slice(-7).reverse();
     // const [isDescriptionVisible, setisDescriptionVisible] = useState(true);
 
     return (
@@ -39,7 +38,7 @@ export const NewsBlock = () => {
                     Stay updated with the latest developments regulatory changes and company announcements.
                 </p> */}
                 {filteredNews.map((item, index) => {
-                    const { id, title, time } = item;
+                    const { id, url, title, time } = item;
 
                     return (
                         <SwiperSlide key={index} className={css.slide}>
@@ -50,12 +49,12 @@ export const NewsBlock = () => {
                             <div className={css.image}>
                                 <Image src={`/images/news/${id}-min.jpg`} fill alt="news" />
                             </div>
-                            <Link className={css.link} href="as" />
+                            <SmartLink href={`/newsroom?id=${url}`} className={css.link} />
                         </SwiperSlide>
                     );
                 })}
                 <SwiperSlide className={css.slide} style={{ boxShadow: "none", backgroundColor: "#fff" }}>
-                    <UI.Button variant="link" colorScheme="primary" className={css.other_news} href="/news">
+                    <UI.Button variant="link" colorScheme="primary" className={css.other_news} href="/newsroom">
                         See other news...
                     </UI.Button>
                 </SwiperSlide>

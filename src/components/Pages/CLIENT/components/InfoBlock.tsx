@@ -4,7 +4,7 @@ import Content from "@/content/en.json" assert { type: "json" };
 import { useGetVerifiedCertificateQuery } from "@/store/reducers/apiReducer";
 import clsx from "clsx";
 import Image from "next/image";
-import React, { FC, useEffect } from "react";
+import React, { CSSProperties, FC, useEffect } from "react";
 import css from "../ClientContent.module.css";
 
 type InfoBlockProps = {
@@ -61,13 +61,30 @@ export const InfoBlock: FC<InfoBlockProps> = ({ utn, setError, setisLoading }) =
 
     if (!data) return;
 
-    const fields: Array<"vessel" | "imo_number" | "certificate_number" | "certificate_status" | "certificate_name" | "issue_date"> = ["vessel", "imo_number", "certificate_number", "certificate_status", "certificate_name", "issue_date"];
+    const fields: Array<"vessel" | "imo_number" | "certificate_number" | "certificate_status" | "certificate_name" | "issue_date" | "expiry_date"> = ["vessel", "imo_number", "certificate_number", "certificate_status", "certificate_name", "issue_date", "expiry_date"];
+
+    const VerificationStatus = () => {
+        if (data.certificate_status === "Expired") {
+            return (
+                <>
+                    <p>{Content.CLIENT.Info_block.not_verified}</p>
+                    <p>{Content.CLIENT.Info_block.not_verified_desc}</p>
+                </>
+            );
+        } else {
+            return (
+                <>
+                    <p>{Content.CLIENT.Info_block.verified}</p>
+                    <p>{Content.CLIENT.Info_block.verified_desc}</p>
+                </>
+            );
+        }
+    };
 
     return (
         <div className={css.data_body}>
-            <div className={css.message}>
-                <p>{Content.CLIENT.Info_block.verified}</p>
-                <p>{Content.CLIENT.Info_block.verified_desc}</p>
+            <div className={css.message} style={{ "--bg-status": data.certificate_status === "Expired" ? "var(--color-red)" : "var(--color-green)" } as CSSProperties}>
+                <VerificationStatus />
             </div>
             <div className={css.info}>
                 {(fields as typeof fields).map((field) => (
