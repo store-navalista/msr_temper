@@ -1,6 +1,31 @@
 "use client";
 
+import { useState } from "react";
 import css from "../Tabs.module.css";
+
+const DownloadButton = () => {
+    const [loading, setLoading] = useState(false);
+
+    const handleDownload = async () => {
+        setLoading(true);
+
+        window.location.href = "/api/download-wait";
+
+        fetch("/api/start-process", {
+            method: "POST",
+            body: JSON.stringify({
+                vessel: ["1981cee-906b-7433-99e3-63de86a62bb7"],
+                api_process: true,
+            }),
+        }).finally(() => setLoading(false));
+    };
+
+    return (
+        <button onClick={handleDownload} className={css.button}>
+            {loading ? "loading" : "Generate status report"}
+        </button>
+    );
+};
 
 const data = [
     { vessel_name: "Arktika", imo: "9876543", type: "Dry Cargo", flag: "Uzbekistan", port: "Punta Arenas" },
@@ -30,7 +55,7 @@ export const Vessels = () => {
                         })}
                         <div className={css.buttons}>
                             <div>
-                                <button className={css.button}>Generate status report</button>
+                                <DownloadButton />
                             </div>
                         </div>
                     </div>

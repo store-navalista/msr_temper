@@ -4,17 +4,21 @@ import { useState } from "react";
 import css from "./Auth.module.css";
 import { SVG } from "@/components/SVG";
 import { useRouter } from "next/navigation";
+// import { useAuthMutation } from "@/store/reducers/apiReducer";
 
 export const Auth = () => {
+    // const [auth, { data }] = useAuthMutation();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        // await auth({ username: email, password });
         router.push("/for-clients/cabinet/?id=1234");
-        console.log("Submitted:", { email, password });
     };
+
+    // console.log(data);
 
     return (
         <dialog open={true} className={css.authDialog}>
