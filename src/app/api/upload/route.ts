@@ -4,7 +4,6 @@ import { pushFile } from "@/lib/waitStore";
 export async function POST(req: NextRequest) {
     try {
         const body = await req.json();
-
         if (!body.status_survey) {
             return NextResponse.json({ error: "No file provided" }, { status: 400 });
         }
