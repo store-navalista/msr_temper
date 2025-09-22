@@ -2,14 +2,25 @@ import { NextRequest, NextResponse } from "next/server";
 import { pushFile } from "@/lib/waitStore";
 
 export async function POST(req: NextRequest) {
-    const arrayBuffer = await req.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
+    console.log(123);
 
-    pushFile({
-        buffer,
-        mime: req.headers.get("content-type") || "application/pdf",
-        filename: req.headers.get("x-filename") || `file-${Date.now()}.pdf`,
-    });
+    try {
+        const body = await req.json();
 
-    return NextResponse.json({ ok: true });
+        if (!body.status_survey) {
+            return NextResponse.json({ error: "No file provided" }, { status: 400 });
+        }
+
+        const buffer = Buffer.from(body.status_survey, "base64");
+
+        pushFile({
+            buffer,
+            mime: "application/pdf",
+            filename: "status_report.pdf",
+        });
+
+        return NextResponse.json({ ok: true });
+    } catch {
+        return NextResponse.json({ error: "Invalid request" }, { status: 500 });
+    }
 }
