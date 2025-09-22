@@ -14,8 +14,10 @@ const DownloadButton = () => {
         fetch("/api/start-process", {
             method: "POST",
             body: JSON.stringify({
-                vessel: ["1981cee-906b-7433-99e3-63de86a62bb7"],
-                api_process: true,
+                context: {
+                    vessel: ["1981cee-906b-7433-99e3-63de86a62bb7"],
+                    api_process: true,
+                },
             }),
         }).finally(() => setLoading(false));
     };
