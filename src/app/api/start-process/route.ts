@@ -12,8 +12,7 @@ export async function POST(req: NextRequest) {
             },
             body,
         });
-
-        // await fetch("http://localhost:3001/api/users", {
+        // await fetch(`http://localhost:3001/api/users`, {
         //     method: "POST",
         //     headers: {
         //         "Content-Type": "application/json",
@@ -27,3 +26,4 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ started: false, error: (error as Error).message }, { status: 500 });
     }
 }
+//

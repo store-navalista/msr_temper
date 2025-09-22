@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { pushFile } from "@/lib/waitStore";
 
 export async function POST(req: NextRequest) {
-    console.log(123);
-
     try {
         const body = await req.json();
 
