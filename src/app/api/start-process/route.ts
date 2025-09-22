@@ -7,7 +7,7 @@ export async function POST(req: NextRequest) {
         await fetch(`${process.env.ELMA_SV_URL}`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                // "Content-Type": "application/json",
                 Authorization: `Bearer ${process.env.ELMA_SV_TOKEN}`,
             },
             body,
