@@ -18,7 +18,7 @@ export const ClientCabinet = () => {
     const [companyData, setCompanyData] = useState<CompanyDataType | null>(null);
     const [queryParams, setQueryParams] = useState<Record<string, string>>({});
     const [activeTab, setActiveTab] = useState<TabsType>("basic");
-    // reload must
+
     useEffect(() => {
         const getData = async () => {
             try {
