@@ -92,9 +92,44 @@
             font-size: 18px;
             background-color: #fff;
             transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             &:hover {
                 transform: translateY(-2px);
             }
+            .loader {
+                display: block;
+                width: 20px;
+                aspect-ratio: 1;
+                background-image: url(/images/svg/loader.svg);
+            }
         }
+    }
+    p.error {
+        color: red;
+        margin: 24px 0 0 0;
+        text-align: center;
+        width: 100%;
+        align-self: center;
+    }
+}
+
+.loading {
+    background-color: var(--color-primary);
+    color: #fff;
+    padding: 12px;
+    text-align: center;
+    border-radius: 8px;
+    animation: loading-blink 2s ease-in-out infinite;
+}
+
+@keyframes loading-blink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
     }
 }

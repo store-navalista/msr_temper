@@ -7,9 +7,23 @@ type NewsItem = {
     content: string;
 };
 
+export type AuthData = {
+    message: string;
+    status: number;
+    data?: {
+        companyId: string;
+        userId: string;
+        exp: number;
+        iat: number;
+    };
+};
+
 export const api = createApi({
     reducerPath: "api",
-    baseQuery: fetchBaseQuery({ baseUrl: "/api" }),
+    baseQuery: fetchBaseQuery({
+        baseUrl: "/api",
+        credentials: "include",
+    }),
     tagTypes: ["Certificate", "User"],
     endpoints: (builder) => ({
         getNews: builder.query<NewsItem[], void>({
@@ -19,14 +33,28 @@ export const api = createApi({
             query: (utn) => `verify/${utn}`,
             providesTags: (result, error, utn) => [{ type: "Certificate", id: utn }],
         }),
-        auth: builder.mutation<{ token: string }, { username: string; password: string }>({
+        generateSV: builder.query<Blob, string>({
+            query: (vesselId) => ({
+                url: `user/generate-survey-status/${vesselId}`,
+                responseHandler: (response) => response.blob(),
+            }),
+        }),
+        auth: builder.mutation<AuthData, { email: string; password: string }>({
             query: (credentials) => ({
                 url: "auth",
                 method: "POST",
                 body: credentials,
             }),
+            invalidatesTags: ["User"],
+        }),
+        logout: builder.mutation<void, void>({
+            query: () => ({
+                url: "auth/logout",
+                method: "POST",
+            }),
+            invalidatesTags: ["User"],
         }),
     }),
 });
 
-export const { useGetNewsQuery, useGetVerifiedCertificateQuery, useAuthMutation, util } = api;
+export const { useGetNewsQuery, useLazyGenerateSVQuery, useGetVerifiedCertificateQuery, useAuthMutation, useLogoutMutation, util } = api;

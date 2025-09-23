@@ -5,17 +5,45 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { Auth } from "./Auth/Auth";
 import css from "./ClientCabinet.module.css";
-// import { FlyCircles } from "./components/Effects/FlyCircles/FlyCircles";
 import { Header } from "./components/Header";
 import { Navigation } from "./components/Navigation";
 import { Tabs } from "./components/Tabs/Tabs";
+import { SVG } from "@/components/SVG";
 
 export type TabsType = keyof typeof Content.CLIENT.Cabinet.navigation;
+export type CompanyDataType = Record<string, string | Record<string, string>[]>;
 
 export const ClientCabinet = () => {
     const searchParams = useSearchParams();
+    const [companyData, setCompanyData] = useState<CompanyDataType | null>(null);
     const [queryParams, setQueryParams] = useState<Record<string, string>>({});
     const [activeTab, setActiveTab] = useState<TabsType>("basic");
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const dataRes = await fetch("/api/auth/verify", {
+                    method: "GET",
+                    credentials: "include",
+                });
+
+                if (dataRes.ok) {
+                    const userData = await dataRes.json();
+
+                    const companyData = await fetch(`/api/user/get-company-data/${userData?.companyId}`, {
+                        method: "GET",
+                        credentials: "include",
+                    });
+
+                    setCompanyData(await companyData.json());
+                }
+            } catch (error) {
+                console.error("Token verification failed:", error);
+            }
+        };
+
+        getData();
+    }, [searchParams]);
 
     useEffect(() => {
         const params: Record<string, string> = {};
@@ -30,6 +58,14 @@ export const ClientCabinet = () => {
         }
     }, [searchParams]);
 
+    if (!companyData) {
+        return (
+            <div className={css.loader}>
+                <SVG.PulseLoader />
+            </div>
+        );
+    }
+
     return (
         <div className={css.cabinet}>
             {!Object.keys(queryParams).length ? (
@@ -38,9 +74,8 @@ export const ClientCabinet = () => {
                 <>
                     <Header />
                     <Navigation {...{ activeTab, setActiveTab }} />
-                    <p className={css.company}>A.P. Moller-Maersk Group (Maersk)</p>
-                    {/* <FlyCircles /> */}
-                    <Tabs {...{ activeTab }} />
+                    <p className={css.company}>{typeof companyData?.companies_name === "string" ? companyData.companies_name : "Company"}</p>
+                    {companyData && <Tabs {...{ activeTab, companyData }} />}
                 </>
             )}
         </div>

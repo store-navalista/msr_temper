@@ -2,18 +2,18 @@
 
 import Content from "@/content/en.json" assert { type: "json" };
 import { FC, useState } from "react";
-import { TabsType } from "../../ClientCabinet";
+import { CompanyDataType, TabsType } from "../../ClientCabinet";
 import css from "./Tabs.module.css";
 import { Tables } from "./components";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
-const Table: FC<{ type: TabsType }> = ({ type }) => {
+const Table: FC<{ type: TabsType; companyData: CompanyDataType }> = ({ type, companyData }) => {
     switch (type) {
         case "basic":
-            return <Tables.Basic />;
+            return <Tables.Basic {...{ companyData }} />;
         case "fleet":
-            return <Tables.Vessels />;
+            return <Tables.Vessels {...{ companyData }} />;
         case "online_app":
             return <Tables.Online />;
         default:
@@ -21,7 +21,7 @@ const Table: FC<{ type: TabsType }> = ({ type }) => {
     }
 };
 
-export const Tabs: FC<{ activeTab: TabsType }> = ({ activeTab }) => {
+export const Tabs: FC<{ activeTab: TabsType; companyData: CompanyDataType }> = ({ activeTab, companyData }) => {
     const [isLoader] = useState(false);
 
     return (
@@ -34,7 +34,7 @@ export const Tabs: FC<{ activeTab: TabsType }> = ({ activeTab }) => {
             ) : (
                 <AnimatePresence mode="wait">
                     <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-                        <Table type={activeTab} />
+                        <Table type={activeTab} companyData={companyData} />
                     </motion.div>
                 </AnimatePresence>
             )}

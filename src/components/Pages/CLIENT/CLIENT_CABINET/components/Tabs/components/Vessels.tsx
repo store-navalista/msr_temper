@@ -1,42 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { FC, useState } from "react";
 import css from "../Tabs.module.css";
+import { CompanyDataType } from "../../../ClientCabinet";
+import { useLazyGenerateSVQuery } from "@/store/reducers/apiReducer"; // Используем lazy query
 
-const DownloadButton = () => {
+const DownloadButton: FC<{ vesselId: string }> = ({ vesselId }) => {
     const [loading, setLoading] = useState(false);
+    const [trigger] = useLazyGenerateSVQuery(); // Lazy query для ручного запуска
 
     const handleDownload = async () => {
         setLoading(true);
+        try {
+            const result = await trigger(vesselId);
 
-        window.location.href = "/api/download-wait";
-
-        fetch("/api/start-process", {
-            method: "POST",
-            body: JSON.stringify({
-                context: {
-                    vessel: ["1981cee-906b-7433-99e3-63de86a62bb7"],
-                    api_process: true,
-                },
-            }),
-        }).finally(() => setLoading(false));
+            if (result.data) {
+                const blob = new Blob([result.data], { type: "application/pdf" });
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = `status-report-${vesselId}.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                window.URL.revokeObjectURL(url);
+            }
+        } catch (error) {
+            console.error("Error downloading PDF:", error);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
-        <button onClick={handleDownload} className={css.button}>
-            {loading ? "loading" : "Generate status report"}
+        <button onClick={handleDownload} className={css.button} disabled={loading}>
+            {loading ? "Generating..." : "Generate status report"}
         </button>
     );
 };
 
-const data = [
-    { vessel_name: "Arktika", imo: "9876543", type: "Dry Cargo", flag: "Uzbekistan", port: "Punta Arenas" },
-    { vessel_name: "Vostok", imo: "9876544", type: "Tanker", flag: "Trinidad and Tobago", port: "Aasiaat" },
-    { vessel_name: "Bering Sea", imo: "9876545", type: "Container", flag: "Uruguay", port: "Jakobshavn" },
-    { vessel_name: "Polyarnik", imo: "9876546", type: "Icebreaker", flag: "Mongolia", port: "Sukkertoppen" },
-];
+export const Vessels: FC<{ companyData: CompanyDataType }> = ({ companyData }) => {
+    const { vessels } = companyData;
+    const fields = ["vessel_name", "imo", "vesse_type", "flag", "port_of_registry"];
 
-export const Vessels = () => {
     return (
         <div className={css.table}>
             <div className={css.header}>
@@ -47,17 +53,20 @@ export const Vessels = () => {
                 <p>Port of Registry</p>
                 <p>Review</p>
             </div>
-            {data.map((ship, index) => {
+            {(vessels as Record<string, string>[]).map((ship, index) => {
                 const keys = Object.keys(ship) as Array<keyof typeof ship>;
+                const vesselId = ship.id || ship.vessel_id || ship.imo || index.toString();
 
                 return (
                     <div key={index} className={css.row}>
                         {keys.map((v, i) => {
+                            const isField = fields.includes(v);
+                            if (!isField) return null;
                             return <p key={`${v}` + i}>{ship[v]}</p>;
                         })}
                         <div className={css.buttons}>
                             <div>
-                                <DownloadButton />
+                                <DownloadButton vesselId={vesselId} />
                             </div>
                         </div>
                     </div>

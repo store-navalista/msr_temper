@@ -8,3 +8,9 @@
         text-decoration: underline;
     }
 }
+.loader {
+    margin: 0 auto;
+    width: 32px;
+    aspect-ratio: 1;
+    margin: 120px auto 60;
+}

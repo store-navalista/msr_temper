@@ -1,8 +1,6 @@
-// import bcrypt from "bcryptjs";
-// import jwt from "jsonwebtoken";
-// import { serialize } from "cookie";
-import { NextResponse, NextRequest } from "next/server";
-// import axios from "axios";
+import axios from "axios";
+import jwt from "jsonwebtoken";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
     if (req.method !== "POST") {
@@ -10,35 +8,43 @@ export async function POST(req: NextRequest) {
     }
 
     try {
-        // const body = await req.json();
-        // const { username, password } = body;
-        // const elma_req = {
-        //     grant_type: "client_credentials",
-        //     client_id: process.env.ELMA_CLIENT_ID,
-        //     client_secret: process.env.ELMA_CLIENT_SECRET,
-        //     redirect_uri: process.env.ELMA_REDIRECT_URI,
-        // };
+        const body = await req.json();
 
-        // const params = new URLSearchParams(elma_req as Record<string, string>).toString();
-        // const token_response = await axios.post(process.env.ELMA_REDIRECT_URI || "", params, {
-        //     headers: {
-        //         "Content-Type": "application/x-www-form-urlencoded",
-        //     },
-        // });
+        const response = await axios.post(process.env.ELMA_AUTH_URL || "", body, {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${process.env.ELMA_AUTH_TOKEN?.trim()}`,
+            },
+        });
 
-        // const auth_response = await axios.post(
-        //     "https://elma.tm-z.com/api/extensions/36d462e1-bbe9-40b5-bd56-29232ad03d30/script/auth",
-        //     { username, password },
-        //     {
-        //         headers: {
-        //             Authorization: `Bearer ${token_response.data.access_token}`,
-        //         },
-        //     }
-        // );
+        if (response.data.code === 401) {
+            return NextResponse.json({ status: 401, message: "User not found or password is incorrect!" });
+        }
 
-        return NextResponse.json({ status: 200 });
+        const decodeResponse = jwt.verify(response.data.token, process.env.ELMA_AUTH_SECRET || "");
+
+        const nextResponse = NextResponse.json({
+            status: 200,
+            message: "Успешно",
+            data: decodeResponse,
+        });
+
+        nextResponse.cookies.set({
+            name: "auth_token",
+            value: response.data.token,
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            maxAge: 60 * 60 * 24 * 7,
+            path: "/",
+        });
+
+        return nextResponse;
     } catch (error) {
         console.error("Ошибка аутентификации:", error);
+        if (axios.isAxiosError(error) && error.response?.status === 401) {
+            return NextResponse.json({ status: 401, message: "Пользователь не найден" });
+        }
         return NextResponse.json({ message: "Внутренняя ошибка сервера" }, { status: 500 });
     }
 }

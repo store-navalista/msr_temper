@@ -18,4 +18,12 @@
             color: var(--color-blue);
         }
     }
+    .logout {
+        color: var(--color-red);
+        transition: color 0.3s, background-color 0.3s;
+        &:hover {
+            color: #fff;
+            background-color: var(--color-red);
+        }
+    }
 }
