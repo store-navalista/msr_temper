@@ -15,6 +15,7 @@ export const Auth = () => {
     const router = useRouter();
 
     useEffect(() => {
+        console.log(111);
         const checkAuth = async () => {
             try {
                 const response = await fetch("/api/auth/verify", {
@@ -23,11 +24,14 @@ export const Auth = () => {
                 });
 
                 if (response.ok) {
-                    const userData = await response.json();
-                    router.push(`/for-clients/cabinet/?id=${userData.userId}`);
-                } else {
-                    setIsCheckingToken(false);
+                    const userData = await response.json().catch(() => null);
+                    if (userData?.userId) {
+                        router.push(`/for-clients/cabinet/?id=${userData.userId}`);
+                        return;
+                    }
                 }
+
+                setIsCheckingToken(false);
             } catch (error) {
                 console.error("Token verification failed:", error);
                 setIsCheckingToken(false);
@@ -44,7 +48,6 @@ export const Auth = () => {
     };
 
     useEffect(() => {
-        console.log(data);
         if (data?.status === 401) {
             setError(data.message);
         } else if (data?.status === 200) {

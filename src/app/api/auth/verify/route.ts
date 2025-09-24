@@ -7,7 +7,7 @@ export async function GET(req: NextRequest) {
         const token = req.cookies.get("auth_token")?.value;
 
         if (!token) {
-            return NextResponse.json({ message: "No token provided" }, { status: 401 });
+            return NextResponse.json({ message: "Not authorized" }, { status: 401 });
         }
 
         const decodedData = jwt.verify(token, process.env.ELMA_AUTH_SECRET || "") as AuthData;
