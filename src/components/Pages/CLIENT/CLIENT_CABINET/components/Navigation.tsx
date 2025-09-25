@@ -1,19 +1,22 @@
 "use client";
 
+import { SVG } from "@/components/SVG";
 import Content from "@/content/en.json" assert { type: "json" };
+import { useLogoutMutation } from "@/store/reducers/apiReducer";
+import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
+import { useMediaQuery } from "react-responsive";
 import { TabsType } from "../ClientCabinet";
 import css from "./Navigation.module.css";
-import { useLogoutMutation } from "@/store/reducers/apiReducer";
 
 type NavigationProps = {
     activeTab: TabsType;
     setActiveTab: React.Dispatch<React.SetStateAction<TabsType>>;
-
 };
 
 export const Navigation: FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
+    const isScreen = useMediaQuery({ query: "(min-width: 780px)" });
     const [logout, { isLoading }] = useLogoutMutation();
     const buttons = Object.keys(Content.CLIENT.Cabinet.navigation) as TabsType[];
     const router = useRouter();
@@ -29,15 +32,15 @@ export const Navigation: FC<NavigationProps> = ({ activeTab, setActiveTab }) => 
 
     return (
         <nav className={css.nav}>
-            {buttons.map((tab, index) => {
+            {buttons.map((tab: TabsType, index: number) => {
                 return (
-                    <button onClick={() => setActiveTab(tab)} data-active={activeTab === tab} key={index}>
-                        {Content.CLIENT.Cabinet.navigation[tab]}
+                    <button className={clsx(!isScreen && css.mobile_btn)} onClick={() => setActiveTab(tab)} data-active={activeTab === tab} key={index} style={{ padding: isScreen ? "6px 16px" : "0" }}>
+                        {isScreen ? Content.CLIENT.Cabinet.navigation[tab] : <SVG.CabinetTabsIcons type={tab} />}
                     </button>
                 );
             })}
-            <button onClick={logoutHandler} className={css.logout} disabled={isLoading}>
-                Logout
+            <button style={{ backgroundColor: !isScreen ? "var(--color-red)" : "" }} onClick={logoutHandler} className={clsx(css.logout, !isScreen && css.mobile_btn)} disabled={isLoading}>
+                {isScreen ? "Logout" : <SVG.CabinetTabsIcons type={"logout"} />}
             </button>
         </nav>
     );

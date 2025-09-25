@@ -21,6 +21,7 @@ html {
 
 @media screen and (max-width: 1024px) {
     html {
+        
         --logo-height: 50px;
         --header-padding: 20px;
     }

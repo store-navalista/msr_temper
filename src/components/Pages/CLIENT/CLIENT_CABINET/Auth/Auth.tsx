@@ -15,7 +15,6 @@ export const Auth = () => {
     const router = useRouter();
 
     useEffect(() => {
-        console.log(111);
         const checkAuth = async () => {
             try {
                 const response = await fetch("/api/auth/verify", {

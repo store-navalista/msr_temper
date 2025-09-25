@@ -1,12 +1,12 @@
 "use client";
 
 import Content from "@/content/en.json" assert { type: "json" };
+import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { FC, useState } from "react";
 import { CompanyDataType, TabsType } from "../../ClientCabinet";
 import css from "./Tabs.module.css";
 import { Tables } from "./components";
-import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
 
 const Table: FC<{ type: TabsType; companyData: CompanyDataType }> = ({ type, companyData }) => {
     switch (type) {
