@@ -8,8 +8,10 @@ import { useRouter } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import css from "./ClientContent.module.css";
 import { InfoBlock } from "./components/InfoBlock";
+import { useMediaQuery } from "react-responsive";
 
 export const ClientContent: FC<{ utn?: string }> = ({ utn }) => {
+    const isScreen = useMediaQuery({ query: "(min-width: 480px)" });
     const router = useRouter();
     const dispatch = useAppDispatch();
     const [isLoading, setisLoading] = useState(false);
@@ -46,7 +48,7 @@ export const ClientContent: FC<{ utn?: string }> = ({ utn }) => {
 
     return (
         <div className={css.client_content}>
-            <Image className={css.image_verify} src="/images/svg/verify.svg" alt="verify" width={50} height={50} />
+            {isScreen && <Image className={css.image_verify} src="/images/svg/verify.svg" alt="verify" width={50} height={50} />}
             <div className={css.header}>
                 <p>{Content.CLIENT.req_p1}</p>
                 <h2>{Content.CLIENT.req_p3}</h2>
