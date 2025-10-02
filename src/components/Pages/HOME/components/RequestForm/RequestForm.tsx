@@ -1,36 +1,39 @@
-import useOutsideClick from "@/components/hooks/useOutsideClick";
-import { UI } from "@/components/UI";
+// import useOutsideClick from "@/components/hooks/useOutsideClick";
+// import { UI } from "@/components/UI";
 import Content from "@/content/en.json" assert { type: "json" };
-import clsx from "clsx";
-import Image from "next/image";
-import { useRef, useState } from "react";
+// import clsx from "clsx";
+// import Image from "next/image";
+// import { useRef, useState } from "react";
 import css from "./RequestForm.module.css";
+import { CustomRequestForm } from "./CustomRequest";
 
-const fields = ["name", "email", "company", "phone"] as const;
-type Field = (typeof fields)[number];
+// const fields = ["name", "email", "company", "phone"] as const;
+// type Field = (typeof fields)[number];
 
 export const RequestForm = () => {
-    const [data, setData] = useState({
-        currentSurvey: "Periodic Survey",
-    });
-    const [isSelectActive, setisSelectActive] = useState(false);
-    const ref = useRef<HTMLUListElement>(null);
+    // const [data, setData] = useState({
+    //     currentSurvey: "Periodic Survey",
+    // });
+    // const [isSelectActive, setisSelectActive] = useState(false);
+    // const ref = useRef<HTMLUListElement>(null);
 
-    const sendHandler = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-    };
+    // const sendHandler = (event: React.FormEvent<HTMLFormElement>) => {
+    //     event.preventDefault();
+    // };
 
-    const selectHandler = () => {
-        setisSelectActive((prev) => !prev);
-    };
+    // const selectHandler = () => {
+    //     setisSelectActive((prev) => !prev);
+    // };
 
-    useOutsideClick(ref, () => setisSelectActive(false));
+    // useOutsideClick(ref, () => setisSelectActive(false));
 
     return (
         <section id="request-form" className={css.request_form}>
             <h3 id="classification-survey-heading">{Content.Home._request_form.h3}</h3>
             <p>{Content.Home._request_form.desc}</p>
-            <form className={css.form} onSubmit={sendHandler}>
+            <CustomRequestForm />
+
+            {/* <form className={css.form} onSubmit={sendHandler}>
                 {fields.map((f) => {
                     return (
                         <div key={f} className={css.input}>
@@ -61,7 +64,7 @@ export const RequestForm = () => {
                 <UI.Button colorScheme="secondary" type="submit">
                     {Content.Home._request_form.button}
                 </UI.Button>
-            </form>
+            </form> */}
         </section>
     );
 };

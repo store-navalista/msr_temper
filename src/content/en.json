@@ -56,8 +56,8 @@
         "Info_block": {
             "verified": "Verified!",
             "verified_desc": "This is a verified document",
-            "not_verified": "Not verified",
-            "not_verified_desc": "This document is not verified",
+            "not_verified": "Expired",
+            "not_verified_desc": "This document is expired",
             "vessel": "Vessel",
             "imo_number": "IMO Number",
             "certificate_number": "Certificate Number",
@@ -74,6 +74,12 @@
                 "basic": "Company's basic information",
                 "fleet": "Company's vessels",
                 "online_app": "Online application"
+            },
+            "auth": {
+                "fogot_password": "If you have forgotten your password, please contact your agent.",
+                "sign_in": "Sign In",
+                "desc": "Here you can track your vessels, jobs and job status.",
+                "if_not_exist_acc": "*If you don't have an account yet, please contact your agent."
             }
         }
     },

@@ -7,6 +7,9 @@
     background-image: url(/images/svg/brick-bg.svg);
     background-position: center bottom;
     background-size: 2%;
+    strong {
+        font-family: var(--font-g-medium);
+    }
     .image {
         position: absolute;
         width: 100%;
