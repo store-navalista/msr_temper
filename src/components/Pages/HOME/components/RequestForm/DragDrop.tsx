@@ -40,10 +40,10 @@ const DragDrop: FC<{ uploadedFile: File | null; setUploadedFile: Dispatch<SetSta
 
     // Общая обработка файла
     const handleFile = (file: File) => {
-        // setUploadedFile(file);
+        setUploadedFile(file);
         console.log("Файл выбран:", file.name, file.type, file.size);
 
-        // uploadFile(file);
+        // uploadedFile(file);
     };
 
     // Функция для отправки файла (заглушка)
