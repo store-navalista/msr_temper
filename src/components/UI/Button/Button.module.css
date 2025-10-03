@@ -20,4 +20,10 @@
     &:hover a {
         translate: -3px -3px;
     }
+    button:disabled {
+        cursor: default;
+        &:hover {
+            translate: none;
+        }
+    }
 }

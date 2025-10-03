@@ -1,70 +1,32 @@
-// import useOutsideClick from "@/components/hooks/useOutsideClick";
-// import { UI } from "@/components/UI";
+import { UI } from "@/components/UI";
 import Content from "@/content/en.json" assert { type: "json" };
-// import clsx from "clsx";
-// import Image from "next/image";
-// import { useRef, useState } from "react";
 import css from "./RequestForm.module.css";
-import { CustomRequestForm } from "./CustomRequest";
-
-// const fields = ["name", "email", "company", "phone"] as const;
-// type Field = (typeof fields)[number];
+import { OnlineRequest } from "../OnlineRequest/OnlineRequest";
+import DragDrop from "./DragDrop";
+import { useState } from "react";
 
 export const RequestForm = () => {
-    // const [data, setData] = useState({
-    //     currentSurvey: "Periodic Survey",
-    // });
-    // const [isSelectActive, setisSelectActive] = useState(false);
-    // const ref = useRef<HTMLUListElement>(null);
+    const [uploadedFile, setUploadedFile] = useState<File | null>(null);
 
-    // const sendHandler = (event: React.FormEvent<HTMLFormElement>) => {
-    //     event.preventDefault();
-    // };
-
-    // const selectHandler = () => {
-    //     setisSelectActive((prev) => !prev);
-    // };
-
-    // useOutsideClick(ref, () => setisSelectActive(false));
+    const sendHandler = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    };
 
     return (
         <section id="request-form" className={css.request_form}>
             <h3 id="classification-survey-heading">{Content.Home._request_form.h3}</h3>
             <p>{Content.Home._request_form.desc}</p>
-            <CustomRequestForm />
-
-            {/* <form className={css.form} onSubmit={sendHandler}>
-                {fields.map((f) => {
-                    return (
-                        <div key={f} className={css.input}>
-                            <div className={css.icon}>
-                                <Image src={`/images/svg/form-${f}.svg`} fill alt="icon" />
-                            </div>
-                            <input placeholder={Content.Home._request_form.placeholder[f as Field]} />
-                        </div>
-                    );
-                })}
-                <div className={clsx(css.select, isSelectActive && css.active)} onClick={selectHandler}>
-                    {data.currentSurvey}
-                    <div className={css.select_icon}>
-                        <Image src={`/images/svg/arrow-single.svg`} fill alt="icon" />
-                    </div>
-                    {isSelectActive && (
-                        <ul ref={ref} className={css.list}>
-                            {Content.Home._request_form.selects.map((s) => {
-                                return (
-                                    <li onClick={() => setData((prev) => ({ ...prev, currentSurvey: s }))} key={s}>
-                                        {s}
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    )}
+            <OnlineRequest />
+            <form className={css.form} onSubmit={sendHandler}>
+                <p>{Content.Home._request_form.after_fill}</p>
+                <div className={css.file_block}>
+                    <DragDrop {...{ uploadedFile, setUploadedFile }} />
+                    <textarea placeholder="Here you can leave a comment for our manager." className={css.comments} />
                 </div>
-                <UI.Button colorScheme="secondary" type="submit">
+                <UI.Button disabled={!uploadedFile} colorScheme={!uploadedFile ? "disabled" : "secondary"} type="submit">
                     {Content.Home._request_form.button}
                 </UI.Button>
-            </form> */}
+            </form>
         </section>
     );
 };

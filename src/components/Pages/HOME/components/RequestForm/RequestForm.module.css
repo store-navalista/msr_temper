@@ -31,12 +31,40 @@
     .form {
         display: flex;
         flex-direction: column;
-        width: 500px;
+        width: 800px;
         margin: 0 auto;
         gap: 16px;
         margin-top: 16px;
+        p {
+            text-align: center;
+        }
         @media screen and (max-width: 768px) {
             width: 100%;
+        }
+        .file_block {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            .comments {
+                flex: 1;
+                resize: none;
+                outline-color: var(--color-primary);
+                padding: 12px;
+                color: #333;
+                border-radius: 8px;
+                border: none;
+                box-shadow: 0 0 4px 0 #c6c6c6;
+                &::placeholder {
+                    color: #a8a8a8;
+                }
+            }
+            .file_drop {
+                border-radius: 8px;
+                width: 200px;
+                height: 200px;
+                background-color: green;
+            }
         }
         .select {
             position: relative;

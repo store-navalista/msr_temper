@@ -5,7 +5,7 @@ import { SmartLink } from "@/components/Pages/SmartLink/SmartLink";
 
 type ButtonProps = {
     children: React.ReactNode;
-    colorScheme?: "primary" | "secondary" | "tertiary";
+    colorScheme?: "primary" | "secondary" | "tertiary" | "disabled";
     variant?: "button" | "link" | "submit";
     href?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement> &
@@ -29,6 +29,11 @@ export const Button: FC<ButtonProps> = ({ children, colorScheme = "primary", var
             case "tertiary":
                 return {
                     backgroundColor: "var(--color-green)",
+                    color: "#fff",
+                };
+            case "disabled":
+                return {
+                    backgroundColor: "#999",
                     color: "#fff",
                 };
             default:

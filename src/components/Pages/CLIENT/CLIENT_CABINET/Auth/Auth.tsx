@@ -69,7 +69,7 @@ export const Auth = () => {
 
     useEffect(() => {
         if (data?.status === 401) {
-            setError(data.message);
+            setError(data.message + " Please check your password or contact your agent.");
         } else if (data?.status === 200) {
             setError(null);
             router.push(`/for-clients/cabinet/?id=${data?.data?.userId}`);

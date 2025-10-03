@@ -1,10 +1,10 @@
 "use client";
 
 import { UI } from "@/components/UI";
-import css from "../Tabs.module.css";
+import css from "./OnlineRequest.module.css";
 import { SVG } from "@/components/SVG";
 
-export const Online = () => {
+export const OnlineRequest = () => {
     const downloadFile = () => {
         const link = document.createElement("a");
         link.href = "/docs/QP 07 F01 Request for Service.doc";

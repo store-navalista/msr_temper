@@ -1,4 +1,4 @@
-import { Address, AltMail, Arrow, CabinetTabsIcons, Eye, Help, IMO, Instagram, Linkedin, Login, Mail, Password, PasswordEye, Phone, PulseLoader, Whatsup, WordDoc } from "./SVGs";
+import { Address, AltMail, Arrow, CabinetTabsIcons, Eye, FileExport, Help, IMO, Instagram, Linkedin, Login, Mail, Password, PasswordEye, Phone, PulseLoader, Whatsup, WordDoc } from "./SVGs";
 
 export const SVG = {
     Arrow,
@@ -18,4 +18,5 @@ export const SVG = {
     CabinetTabsIcons,
     PasswordEye,
     Help,
+    FileExport,
 };

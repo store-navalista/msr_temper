@@ -72,8 +72,7 @@
             "description": "Client Portal",
             "navigation": {
                 "basic": "Company's basic information",
-                "fleet": "Company's vessels",
-                "online_app": "Online application"
+                "fleet": "Company's vessels"
             },
             "auth": {
                 "fogot_password": "If you have forgotten your password, please contact your agent.",
@@ -107,6 +106,7 @@
                 "phone": "Phone"
             },
             "button": "Send Request",
+            "after_fill": "Once you've downloaded and completed the form, you can submit it here. Our manager will process your request.",
             "selects": ["Periodic Survey", "Initial Survey", "Renewal Survey", "Intermediate Survey"]
         },
         "_services_block": {

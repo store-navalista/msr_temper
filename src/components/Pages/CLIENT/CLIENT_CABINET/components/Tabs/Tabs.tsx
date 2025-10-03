@@ -14,8 +14,6 @@ const Table: FC<{ type: TabsType; companyData: CompanyDataType }> = ({ type, com
             return <Tables.Basic {...{ companyData }} />;
         case "fleet":
             return <Tables.Vessels {...{ companyData }} />;
-        case "online_app":
-            return <Tables.Online />;
         default:
             return null;
     }
