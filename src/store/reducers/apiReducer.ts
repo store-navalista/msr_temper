@@ -54,7 +54,14 @@ export const api = createApi({
             }),
             invalidatesTags: ["User"],
         }),
+        request: builder.mutation<Record<string, string>, FormData>({
+            query: (formData) => ({
+                url: "send-request",
+                method: "POST",
+                body: formData,
+            }),
+        }),
     }),
 });
 
-export const { useGetNewsQuery, useLazyGenerateSVQuery, useGetVerifiedCertificateQuery, useAuthMutation, useLogoutMutation, util } = api;
+export const { useGetNewsQuery, useLazyGenerateSVQuery, useRequestMutation, useGetVerifiedCertificateQuery, useAuthMutation, useLogoutMutation, util } = api;

@@ -2,16 +2,18 @@ import React, { FC } from "react";
 import css from "./Button.module.css";
 import clsx from "clsx";
 import { SmartLink } from "@/components/Pages/SmartLink/SmartLink";
+import { SVG } from "@/components/SVG";
 
 type ButtonProps = {
     children: React.ReactNode;
     colorScheme?: "primary" | "secondary" | "tertiary" | "disabled";
     variant?: "button" | "link" | "submit";
     href?: string;
+    isLoading?: boolean;
 } & React.ButtonHTMLAttributes<HTMLButtonElement> &
     React.AnchorHTMLAttributes<HTMLAnchorElement>;
 
-export const Button: FC<ButtonProps> = ({ children, colorScheme = "primary", variant = "button", href = "/", onClick, className, ...args }) => {
+export const Button: FC<ButtonProps> = ({ children, isLoading, colorScheme = "primary", variant = "button", href = "/", onClick, className, ...args }) => {
     const combinedClassName = clsx(css.button, className);
 
     const getColorScheme = () => {
@@ -49,7 +51,7 @@ export const Button: FC<ButtonProps> = ({ children, colorScheme = "primary", var
             return (
                 <div className={combinedClassName}>
                     <button onClick={onClick} style={getColorScheme()} {...args}>
-                        {children}
+                        {isLoading ? <SVG.PulseLoader className={css.loader} /> : children}
                     </button>
                 </div>
             );

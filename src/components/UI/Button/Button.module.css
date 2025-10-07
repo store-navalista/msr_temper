@@ -27,3 +27,8 @@
         }
     }
 }
+.loader {
+    display: flex;
+    width: 22px;
+    aspect-ratio: 1;
+}

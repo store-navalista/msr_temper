@@ -4,6 +4,7 @@
 }
 
 .request_form {
+    position: relative;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -128,5 +129,14 @@
                 aspect-ratio: 1;
             }
         }
+    }
+    .message {
+        position: absolute;
+        font-size: 14px;
+        color: green;
+        bottom: 36px;
+    }
+    .error_message {
+        color: var(--color-red);
     }
 }

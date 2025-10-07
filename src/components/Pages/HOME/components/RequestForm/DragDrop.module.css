@@ -64,3 +64,6 @@
 .error {
     box-shadow: 0 0 4px 0 #b50f0f;
 }
+.drag_over {
+    box-shadow: 0 0 12px 0 var(--color-primary);
+}

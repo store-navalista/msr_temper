@@ -1,7 +1,7 @@
-import React, { useState, useRef, FC, Dispatch, SetStateAction } from "react";
-import css from "./DragDrop.module.css";
 import { SVG } from "@/components/SVG";
 import clsx from "clsx";
+import React, { Dispatch, FC, SetStateAction, useRef, useState } from "react";
+import css from "./DragDrop.module.css";
 
 const DragDrop: FC<{ uploadedFile: File | null; setUploadedFile: Dispatch<SetStateAction<File | null>> }> = ({ uploadedFile, setUploadedFile }) => {
     const [isDragOver, setIsDragOver] = useState(false);
@@ -38,34 +38,13 @@ const DragDrop: FC<{ uploadedFile: File | null; setUploadedFile: Dispatch<SetSta
         }
     };
 
-    // Общая обработка файла
     const handleFile = (file: File) => {
         setUploadedFile(file);
-        console.log("Файл выбран:", file.name, file.type, file.size);
-
-        // uploadedFile(file);
     };
 
-    // Функция для отправки файла (заглушка)
-    // const uploadFile = (file) => {
-    //     const formData = new FormData();
-    //     formData.append("file", file);
-
-    //     fetch('/api/upload', {
-    //       method: 'POST',
-    //       body: formData
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => console.log('Файл загружен:', data))
-    //     .catch(error => console.error('Ошибка:', error));
-    // };
-
-    //     <p className="file-name">{uploadedFile.name}</p>
-    // <p className="file-size">{(uploadedFile.size / 1024 / 1024).toFixed(2)} MB</p>
-
     return (
-        <div className={clsx(css.drag_drop, uploadedFile && css.uploaded)}>
-            <div className={`${css.drop_zone} ${isDragOver ? "drag-over" : ""} ${uploadedFile ? "has-file" : ""}`} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} onClick={handleClick}>
+        <div className={clsx(css.drag_drop, uploadedFile && css.uploaded, isDragOver && css.drag_over)}>
+            <div className={css.drop_zone} onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop} onClick={handleClick}>
                 {uploadedFile ? (
                     <button
                         className={css.change_btn}
