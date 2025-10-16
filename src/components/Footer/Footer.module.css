@@ -2,7 +2,6 @@ footer.footer {
     --hover-color: #12badc;
     width: 100%;
     box-sizing: border-box;
-    background-color: var(--color-primary);
     padding: 64px 24px 24px;
     color: #fff;
     font-family: var(--font-g-light);
@@ -145,4 +144,12 @@ footer.footer {
             }
         }
     }
+}
+
+html[data-theme="dark"] footer.footer {
+    background-color: #2a2a2a;
+}
+
+html[data-theme="light"] footer.footer {
+    background-color: var(--color-primary);
 }

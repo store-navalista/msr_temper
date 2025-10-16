@@ -10,6 +10,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
     @media screen and (max-width: 768px) {
         height: 500px;
     }

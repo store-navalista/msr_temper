@@ -1,4 +1,6 @@
 .block {
+    --text-color: var(--color-primary);
+    --color-date: #333;
     .news_block {
         display: flex;
         justify-content: center;
@@ -81,11 +83,11 @@
                         font-size: 22px;
                         line-height: 1.3;
                         transition: color 0.3s ease;
-                        color: var(--color-primary);
+                        color: var(--text-color);
                     }
                     p.date {
                         font-size: 16px;
-                        color: #333;
+                        color: var(--color-date);
                         border-top: 1px solid #999;
                         width: 100px;
                         text-align: center;
@@ -93,6 +95,7 @@
                     }
                 }
                 .gif {
+                    display: none;
                     position: absolute;
                     left: 185px;
                     bottom: 8px;
@@ -159,7 +162,7 @@
     .mirror_title {
         font-size: 32px;
         font-family: var(--font-g-medium);
-        color: var(--color-primary);
+        color: var(--text-color);
     }
 
     .image {
@@ -170,5 +173,13 @@
         box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
         aspect-ratio: 0.36;
         background-image: url(/images/news-bg.jpg);
+    }
+}
+
+html[data-theme="dark"] .block {
+    --text-color: #fff;
+    --color-date: #b6b6b6;
+    .top_mirror {
+        background-image: url(/images/svg/brick-bg-dark.svg);
     }
 }

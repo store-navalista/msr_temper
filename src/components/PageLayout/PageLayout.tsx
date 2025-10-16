@@ -1,5 +1,6 @@
 "use client";
 
+import { ROUTES } from "@/constants/routes";
 import store from "@/store/store";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
@@ -13,7 +14,6 @@ import { NewsBlock } from "../Pages/components/NewsBlock/NewsBlock";
 import { ScrollUpButton } from "../ScrollUpButton/ScrollUpButton";
 import { useScrollStep } from "../hooks/useScrollStep";
 import css from "./PageLayout.module.css";
-import { ROUTES } from "@/constants/routes";
 
 type PageLayoutProps = {
     children: ReactNode;

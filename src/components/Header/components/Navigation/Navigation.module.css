@@ -1,24 +1,13 @@
 .wrapper {
     display: flex;
     gap: 32px;
-    .scrolled_btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 36px;
-        aspect-ratio: 1;
-        border: none;
-        border-radius: 50%;
-        background-color: var(--color-green);
-        transition: transform 0.3s;
-        &:hover {
-            transform: scale(1.04);
-        }
-    }
     ul.links {
         display: flex;
         gap: 24px;
         align-items: center;
+        p {
+            color: var(--color-standart);
+        }
         li {
             position: relative;
             font-size: 18px;
@@ -27,6 +16,7 @@
             align-items: center;
             gap: 6px;
             cursor: pointer;
+            color: var(--color-standart);
             &:after {
                 content: "";
                 position: absolute;
@@ -39,12 +29,15 @@
             }
             :where(.icon, .icon_serv) {
                 position: relative;
-                width: 20px;
+                width: 28px;
                 aspect-ratio: 1;
+                background-color: #fff;
+                border-radius: 50%;
             }
             .icon {
                 img {
                     transition: opacity 0.3s ease-in-out;
+                    padding: 4px;
                     &:first-child {
                         opacity: 1;
                     }
@@ -55,6 +48,9 @@
             }
             .icon_serv {
                 position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 margin-top: 2px;
                 span {
                     position: absolute;
@@ -62,27 +58,26 @@
                     width: 5px;
                     aspect-ratio: 1;
                     border-radius: 50%;
-                    top: -20px;
                     background-color: var(--color-primary);
                     transition: top 0.3s ease-in-out, left 0.3s ease-in-out;
-                    z-index: -1;
-                    left: 8px;
-                    top: 4px;
+                    z-index: 2;
+                    left: 11px;
+                    top: 15px;
                 }
             }
             &:hover {
                 .icon_serv span {
                     &:nth-of-type(1) {
-                        left: -2px;
-                        top: -5px;
+                        left: 0px;
+                        top: -2px;
                     }
                     &:nth-of-type(2) {
-                        left: 16px;
-                        top: -5px;
+                        left: 22px;
+                        top: -2px;
                     }
                     &:nth-of-type(3) {
-                        left: 7px;
-                        top: -12px;
+                        left: 11px;
+                        top: -8px;
                     }
                 }
                 .icon img {
@@ -97,6 +92,7 @@
         }
         .single_link {
             display: flex;
+            align-items: center;
             gap: 6px;
         }
     }
@@ -131,8 +127,6 @@
                 font-size: 14px;
                 padding: 8px 16px;
                 font-family: var(--font-g-semibold);
-                /* border-bottom: 1px solid var(--color-primary);
-                background-color: #f3f3f356; */
                 color: #fff;
                 background-color: var(--color-primary);
             }
@@ -149,6 +143,7 @@
             a {
                 width: 100%;
                 padding: 12px 24px;
+                color: var(--color-standart);
             }
             &[data-size="xs"] {
                 min-width: 300px;
@@ -208,4 +203,8 @@
             }
         }
     }
+}
+
+html[data-theme="dark"] .wrapper ul.dropdown {
+    background-color: var(--color-bg-primary-dark);
 }

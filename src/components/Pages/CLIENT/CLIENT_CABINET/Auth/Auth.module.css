@@ -4,6 +4,7 @@
     padding: 64px 0 0;
     border: none;
     min-width: 450px;
+    background-color: transparent;
     @media screen and (max-width: 1000px) {
         padding: 128px 12px 0;
     }
@@ -169,6 +170,10 @@
     text-align: center;
     border-radius: 8px;
     animation: loading-blink 2s ease-in-out infinite;
+}
+
+html[data-theme="dark"] .authDialog form {
+    background-color: var(--color-bg-primary-dark);
 }
 
 @keyframes loading-blink {

@@ -113,3 +113,7 @@
         }
     }
 }
+
+html[data-theme="dark"] .tabs {
+    background-color: #fff;
+}

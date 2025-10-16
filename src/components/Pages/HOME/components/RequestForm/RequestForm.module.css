@@ -19,6 +19,9 @@
         font-size: 18px;
         line-height: 1.3;
     }
+    :where(h3, p) {
+        color: var(--color-standart);
+    }
     @media screen and (max-width: 768px) {
         padding: 48px 24px;
         background-color: #eeeeeeb0;

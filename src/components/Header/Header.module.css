@@ -10,7 +10,8 @@
     justify-content: space-between;
     align-items: center;
     z-index: 10;
-    background-color: #fff;
+    background-color: var(--background-color);
+    transition: background-color 0.3s;
 }
 .header_wrapper {
     box-sizing: border-box;
@@ -19,9 +20,31 @@
     left: 0;
     z-index: 10;
     width: 100%;
-    background-color: #fff;
+    background-color: var(--background-color);
+    transition: background-color 0.3s;
+    border-bottom: 1px solid #fff;
     .scrolled_header {
         padding: 12px 20px;
     }
     box-shadow: 0 0 4px #33333345;
+}
+.scrolled_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    aspect-ratio: 1;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--color-green);
+    transition: transform 0.3s;
+    &:hover {
+        transform: scale(1.04);
+    }
+}
+.right_block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
 }

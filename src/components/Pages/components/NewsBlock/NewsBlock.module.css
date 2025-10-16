@@ -10,6 +10,9 @@
         font-size: 32px;
         margin-bottom: 24px;
     }
+    :where(h2, .description) {
+        color: var(--color-standart);
+    }
     .description {
         text-wrap: balance;
         font-size: 20px;

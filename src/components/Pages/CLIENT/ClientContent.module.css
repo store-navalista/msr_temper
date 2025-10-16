@@ -233,3 +233,7 @@
         }
     }
 }
+
+html[data-theme="dark"] .client_content {
+    background-color: var(--color-bg-primary-dark);
+}
