@@ -7,8 +7,8 @@ import { SVG } from "@/components/SVG";
 export const OnlineRequest = () => {
     const downloadFile = () => {
         const link = document.createElement("a");
-        link.href = "/docs/QP 07 F01 Request for Service.doc";
-        link.download = "QP 07 F01 Request for Service.doc";
+        link.href = "/docs/QP 07 F01 Service request form.pdf";
+        link.download = "QP 07 F01 Service request form.pdf";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
