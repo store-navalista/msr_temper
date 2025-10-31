@@ -3,11 +3,11 @@
 import { FC, useState } from "react";
 import css from "../Tabs.module.css";
 import { CompanyDataType } from "../../../ClientCabinet";
-import { useLazyGenerateSVQuery } from "@/store/reducers/apiReducer"; // Используем lazy query
+import { useLazyGenerateSVQuery } from "@/store/reducers/apiReducer";
 
 const DownloadButton: FC<{ vesselId: string }> = ({ vesselId }) => {
     const [loading, setLoading] = useState(false);
-    const [trigger] = useLazyGenerateSVQuery(); // Lazy query для ручного запуска
+    const [trigger] = useLazyGenerateSVQuery();
 
     const handleDownload = async () => {
         setLoading(true);

@@ -12,6 +12,11 @@ import clsx from "clsx";
 type UserDataType = {
     companyId: UUID;
     userId: UUID;
+    user: {
+        lastname: string;
+        firstname: string;
+        middlename: string;
+    };
 };
 
 export const RequestForm = () => {
@@ -67,6 +72,7 @@ export const RequestForm = () => {
 
                 if (response.ok) {
                     const userData = await response.json().catch(() => null);
+
                     setUserData(userData);
                 }
             } catch (error) {
@@ -102,6 +108,7 @@ export const RequestForm = () => {
             formData.append("file", uploadedFile);
 
             formData.append("company", requestData.context.company);
+            formData.append("company_representative", requestData.context.company_representative);
             formData.append("comment", requestData.context.comment);
 
             await sendRequest(formData);
