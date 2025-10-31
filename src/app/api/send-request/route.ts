@@ -42,8 +42,6 @@ export async function POST(request: NextRequest) {
             },
         };
 
-        console.log(payload);
-
         const response = await axios.post(`${process.env.ELMA_CUSTOM_REQUEST_CREATE_URL}`, payload, {
             headers: {
                 "Content-Type": "application/json",
