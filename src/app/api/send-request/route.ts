@@ -32,6 +32,7 @@ export async function POST(request: NextRequest) {
                 company_representative: company_representative ? [company_representative] : [],
                 comment: comment || "",
                 request_date: new Date().toISOString(),
+                source: [{ code: "website", name: "website" }],
                 file: [
                     {
                         name: file.name,
@@ -40,6 +41,8 @@ export async function POST(request: NextRequest) {
                 ],
             },
         };
+
+        console.log(payload);
 
         const response = await axios.post(`${process.env.ELMA_CUSTOM_REQUEST_CREATE_URL}`, payload, {
             headers: {

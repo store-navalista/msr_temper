@@ -32,6 +32,7 @@ export const RequestForm = () => {
             company: "",
             company_representative: "",
             comment: "",
+            source: "website",
         },
     });
 
@@ -110,7 +111,7 @@ export const RequestForm = () => {
             formData.append("company", requestData.context.company);
             formData.append("company_representative", requestData.context.company_representative);
             formData.append("comment", requestData.context.comment);
-            formData.append("source", "website");
+            formData.append("source", requestData.context.source);
 
             await sendRequest(formData);
 
@@ -121,6 +122,7 @@ export const RequestForm = () => {
                     company: "",
                     comment: "",
                     company_representative: "",
+                    source: "website",
                 },
             });
         } catch (error) {
