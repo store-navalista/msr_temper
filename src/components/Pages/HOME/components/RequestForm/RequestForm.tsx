@@ -110,6 +110,7 @@ export const RequestForm = () => {
             formData.append("company", requestData.context.company);
             formData.append("company_representative", requestData.context.company_representative);
             formData.append("comment", requestData.context.comment);
+            formData.append("source", "website");
 
             await sendRequest(formData);
 
