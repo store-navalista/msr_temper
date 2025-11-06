@@ -5,6 +5,7 @@
         display: flex;
         gap: 24px;
         align-items: center;
+        font-family: var(--font-g-medium);
         p {
             color: var(--color-standart);
         }
@@ -94,6 +95,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
+            font-family: var(--font-g-medium);
         }
     }
     ul.dropdown {
