@@ -1,25 +1,37 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import css from "./MainBlock.module.css";
 import { UI } from "@/components/UI";
 import Content from "@/content/en.json" assert { type: "json" };
 import ReactPlayer from "react-player";
 import right_block_css from "./RightBlock.module.css";
 import clsx from "clsx";
+import Image from "next/image";
+import { motion } from "framer-motion";
 // import { useMediaQuery } from "react-responsive";
 
 export const MainBlock: FC = () => {
     const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-    const playerRef = useRef<HTMLVideoElement>(null);
 
     useEffect(() => {
         const timer = setTimeout(() => {
             if (!isVideoLoaded) {
-                setIsVideoLoaded(true); // Fallback
+                setIsVideoLoaded(true);
             }
         }, 1000);
 
         return () => clearTimeout(timer);
     }, [isVideoLoaded]);
+
+    const ap = {
+        initial: {
+            opacity: 0,
+            transform: "rotateX(0deg) rotateY(0deg)",
+        },
+        animate: {
+            opacity: 1,
+            transform: "rotateX(0deg) rotateY(-1deg)",
+        },
+    };
 
     return (
         <section className={css.main_block}>
@@ -35,10 +47,14 @@ export const MainBlock: FC = () => {
                         <div className={css.dark_curtain} />
                     </div>
                 </div>
-                <div className={right_block_css.right_block}>
-                    <div className={right_block_css.video_block} style={{ opacity: isVideoLoaded ? 1 : 0 }}>
-                        <ReactPlayer ref={playerRef} className={right_block_css.video} muted={true} loop autoPlay={true} src="/video/main-block-1.mp4" />
-                    </div>
+                <div className={right_block_css.right_block} style={{ borderColor: isVideoLoaded ? "#fff" : "#ffffff" }}>
+                    {!isVideoLoaded ? (
+                        <Image src="/images/svg/loader.svg" width={50} height={50} alt="loader" />
+                    ) : (
+                        <motion.div initial={ap.initial} animate={ap.animate} transition={{ duration: 0.7, delay: 0.2 }} className={right_block_css.video_block}>
+                            <ReactPlayer className={right_block_css.video} muted={true} loop autoPlay={true} src="/video/main-block-1.mp4" />
+                        </motion.div>
+                    )}
                 </div>
             </div>
             <div className={css.footer}>
