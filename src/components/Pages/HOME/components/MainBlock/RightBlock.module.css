@@ -27,6 +27,7 @@
         video {
             width: 100% !important;
             height: 100% !important;
+            transform: scale(1.02);
         }
     }
     @media screen and (max-width: 1440px) {
