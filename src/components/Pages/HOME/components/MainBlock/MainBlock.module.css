@@ -27,6 +27,10 @@
                 transform-style: preserve-3d;
                 background-color: #33333300;
                 transition: transform 1.5s ease, background-color 1.5s ease;
+                &:hover {
+                    transition: transform 0.5s ease;
+                    transform: rotateX(0deg) rotateY(4deg);
+                }
                 & :where(h1, p, a) {
                     position: relative;
                     z-index: 1;
