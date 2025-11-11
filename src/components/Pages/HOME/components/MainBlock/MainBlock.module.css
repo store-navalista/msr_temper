@@ -85,6 +85,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: var(--background-color);
+        color: var(--color-standart);
         & > div {
             display: flex;
             align-items: center;
@@ -109,7 +111,7 @@
             }
         }
         @media screen and (max-width: 1430px) {
-            padding: 48px 16px;
+            padding: 48px 24px;
             & > div {
                 flex-direction: column;
                 gap: 48px;

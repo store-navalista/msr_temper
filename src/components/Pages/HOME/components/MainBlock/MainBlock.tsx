@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import css from "./MainBlock.module.css";
 import { UI } from "@/components/UI";
 import Content from "@/content/en.json" assert { type: "json" };
@@ -34,17 +34,6 @@ export const MainBlock: FC = () => {
         },
     };
 
-    const mobileBtnStyle = {
-        // position: "absolute",
-        // padding: "14px 24px",
-        // zIndex: 3,
-        // left: "24px",
-        // bottom: "0",
-        // width: "fit-content",
-        // height: "fit-content",
-        // border: "1px solid #fff",
-    } as CSSProperties;
-
     return (
         <section className={css.main_block}>
             <div className={css.slider}>
@@ -68,7 +57,7 @@ export const MainBlock: FC = () => {
                         <motion.div initial={ap.initial} animate={ap.animate} transition={{ duration: 0.7, delay: 0.2 }} className={right_block_css.video_block}>
                             {!isDesktop && (
                                 <div className={css.btn_wrapper}>
-                                    <UI.Button variant="link" colorScheme="tertiary" href="#request-form" style={mobileBtnStyle}>
+                                    <UI.Button variant="link" colorScheme="tertiary" href="#request-form">
                                         {Content.Home.button}
                                     </UI.Button>
                                 </div>
