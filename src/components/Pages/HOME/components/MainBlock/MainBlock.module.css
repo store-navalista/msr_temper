@@ -168,6 +168,16 @@
     transform-origin: 20% 20%;
 }
 
+.hiddenOnMobile {
+    display: none;
+}
+
+@media (min-width: 1430px) {
+    .hiddenOnMobile {
+        display: block;
+    }
+}
+
 @-webkit-keyframes Gradient {
     0% {
         background-position: 0 50%;

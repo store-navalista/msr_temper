@@ -64,7 +64,7 @@ const FirstBlock = () => {
 };
 
 const Footer: FC = () => {
-    const company = [...MENU.COMPANY, ...MENU.NEWS];
+    const company = [...MENU.COMPANY, ...MENU.NEWS, "CLIENT"];
     const [serv_left, serv_right] = [MENU.SERVICES.slice(0, 3), MENU.SERVICES.slice(3)];
 
     return (

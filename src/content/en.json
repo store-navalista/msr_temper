@@ -28,7 +28,9 @@
         "AT_SHIP": "At Shipyard",
         "IN_IND": "In Industry",
         "OTHER_SERVICES": "Other Services",
-        "ADV_CONS": "Advisory & Consulting"
+        "ADV_CONS": "Advisory & Consulting",
+        "CLIENT_VERIFY": "Verify Certificate",
+        "CLIENT_CABINET": "Cabinet"
     },
     "GlobalTitles": {
         "contact_us": "Contact Us"

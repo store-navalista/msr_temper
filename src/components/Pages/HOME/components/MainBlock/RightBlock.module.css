@@ -24,6 +24,7 @@
         transform-style: preserve-3d;
         width: 100%;
         aspect-ratio: 1.48;
+        transform: rotateX(-2deg) rotateY(-3deg) translateX(-16px);
         video {
             width: 100% !important;
             height: 100% !important;
