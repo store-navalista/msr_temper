@@ -1,6 +1,17 @@
 .block {
     --text-color: var(--color-primary);
     --color-date: #333;
+    .loader {
+        width: 400px;
+        height: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        img {
+            transform: translateY(60px);
+        }
+    }
     .news_block {
         display: flex;
         justify-content: center;

@@ -1,64 +1,93 @@
-import React from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import css from "./NewsBlock.module.css";
-import NewsData from "@/content/news.json" assert { type: "json" };
 import { UI } from "@/components/UI";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination } from "swiper/modules";
 import { SmartLink } from "../../SmartLink/SmartLink";
+import { NewItemType } from "@/constants/types";
+
+const LoadedImage: FC<{ image_file: string }> = ({ image_file }) => {
+    const [loaded, setLoaded] = useState(false);
+
+    return (
+        <>
+            {!loaded && <Image src="/images/svg/loader.svg" alt="loader" width={48} height={48} />}
+            <Image src={image_file} onLoadingComplete={() => setLoaded(true)} fill alt="news" />;
+        </>
+    );
+};
 
 export const NewsBlock = () => {
-    const filteredNews = NewsData.slice(-7).reverse();
-    // const [isDescriptionVisible, setisDescriptionVisible] = useState(true);
+    const [newsData, setNewsData] = useState<NewItemType[]>([]);
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                const dataRes = await fetch(`/api/news/1`, {
+                    method: "GET",
+                    credentials: "include",
+                });
+
+                if (dataRes.ok) {
+                    const news = await dataRes.json();
+                    setNewsData(news.items);
+                }
+            } catch (error) {
+                console.error("Token verification failed:", error);
+            }
+        };
+
+        getData();
+    }, []);
+
+    const filteredNews = [...newsData].sort((a, b) => new Date(b.create_date.ts).getTime() - new Date(a.create_date.ts).getTime()).slice(0, 7);
 
     return (
         <div className={css.news}>
             <h2>News</h2>
             <p className={css.description}>Stay updated with the latest developments regulatory changes and company announcements.</p>
-            <Swiper
-                spaceBetween={30}
-                // centeredSlides={true}
-                slidesPerView="auto"
-                pagination={{
-                    clickable: true,
-                }}
-                modules={[Pagination]}
-                className={css.swiper}
-                // onSlideChange={(swiper) => {
-                //     if (swiper.activeIndex === 0) {
-                //         setisDescriptionVisible(true);
-                //     } else {
-                //         setisDescriptionVisible(false);
-                //     }
-                // }}
-            >
-                {/* <p style={{ opacity: isDescriptionVisible ? 1 : 0 }} className={css.description}>
-                    Stay updated with the latest developments regulatory changes and company announcements.
-                </p> */}
-                {filteredNews.map((item, index) => {
-                    const { id, url, title, time } = item;
+            {!newsData?.length ? (
+                <div className={css.newsLoader}>
+                    <Image src="/images/svg/loader.svg" alt="loader" width={48} height={48} />
+                </div>
+            ) : (
+                <Swiper
+                    spaceBetween={30}
+                    slidesPerView="auto"
+                    pagination={{
+                        clickable: true,
+                    }}
+                    modules={[Pagination]}
+                    className={css.swiper}
+                >
+                    {filteredNews.map((item, index) => {
+                        const { image_file, title, href_source, create_date } = item;
+                        const date = new Date(create_date.ts);
+                        const formatted = date.toISOString().slice(0, 10);
 
-                    return (
-                        <SwiperSlide key={index} className={css.slide}>
-                            <div className={css.desc}>
-                                <p className={css.text}>{title}</p>
-                                <p className={css.time}>{time}</p>
-                            </div>
-                            <div className={css.image}>
-                                <Image src={`/images/news/${id}-min.jpg`} fill alt="news" />
-                            </div>
-                            <SmartLink href={`/newsroom?id=${url}`} className={css.link} />
-                        </SwiperSlide>
-                    );
-                })}
-                <SwiperSlide className={css.slide} style={{ boxShadow: "none", backgroundColor: "#fff" }}>
-                    <UI.Button variant="link" colorScheme="primary" className={css.other_news} href="/newsroom">
-                        See other news...
-                    </UI.Button>
-                </SwiperSlide>
-            </Swiper>
+                        return (
+                            <SwiperSlide key={index} className={css.slide}>
+                                <div className={css.desc}>
+                                    <p className={css.text}>{title}</p>
+                                    <p className={css.time}>{formatted}</p>
+                                </div>
+                                <div className={css.image}>
+                                    <LoadedImage image_file={image_file} />
+                                </div>
+                                <SmartLink href={`/newsroom?id=${href_source}`} className={css.link} />
+                            </SwiperSlide>
+                        );
+                    })}
+                    <SwiperSlide className={css.slide} style={{ boxShadow: "none", backgroundColor: "#fff" }}>
+                        <UI.Button variant="link" colorScheme="primary" className={css.other_news} href="/newsroom">
+                            See other news...
+                        </UI.Button>
+                    </SwiperSlide>
+                </Swiper>
+            )}
         </div>
     );
 };

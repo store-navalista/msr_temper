@@ -1,6 +1,5 @@
 "use client";
 
-import NewsData from "@/content/news.json" assert { type: "json" };
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FC, Fragment, useEffect, useRef, useState } from "react";
@@ -9,31 +8,26 @@ import { useAnimateOnView } from "../hooks/useAnimateOnView";
 import { SVG } from "../SVG";
 import css from "./NewsContent.module.css";
 import { SmartLink } from "../Pages/SmartLink/SmartLink";
+import { NewItemType } from "@/constants/types";
 
-type ItemType = {
-    id: number;
-    url: string;
-    time: string;
-    title: string;
-};
-
-const PAGE_SIZE = 5;
-
-const New: FC<{ index: number; item: ItemType }> = ({ index, item }) => {
+const New: FC<{ index: number; item: NewItemType }> = ({ index, item }) => {
     const delay = index < 5 ? index * 0.1 : 0;
     const { ref, animation } = useAnimateOnView("none", delay, 0.1, 1);
-    const { id, url, time, title } = item;
+    const { title, create_date, image_file, id } = item;
+
+    const date = new Date(create_date.ts);
+    const formatted = date.toISOString().slice(0, 10);
 
     return (
         <motion.div ref={ref} className={css.new} {...animation}>
-            <SmartLink href={`?id=${url}`} className={css.link}>
+            <SmartLink href={`?id=${id}`} className={css.link}>
                 <div className={css.icon}>
-                    <Image src={`/images/news/${id}-min.jpg`} fill alt="news icon" />
+                    <Image src={image_file} fill alt="news icon" />
                     <SVG.Eye className={css.eye} />
                 </div>
                 <div className={css.content}>
                     <p className={css.description}>{title}</p>
-                    <p className={css.date}>{time}</p>
+                    <p className={css.date}>{formatted}</p>
                 </div>
                 <div className={css.gif}>
                     <Image src="/gifs/cat.gif" alt="Animated GIF" width={20} height={20} unoptimized />
@@ -43,57 +37,99 @@ const New: FC<{ index: number; item: ItemType }> = ({ index, item }) => {
     );
 };
 
+type ResponseDateType = {
+    page: number;
+    limit: number;
+    items: NewItemType[];
+};
+
 export const NewsContent = () => {
     const isScreen = useMediaQuery({ query: "(min-width: 1176px)" });
-    const data = NewsData.slice(-50).reverse();
     const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
+    const [hasMore, setHasMore] = useState(true);
+    const [newsData, setNewsData] = useState<NewItemType[] | []>([]);
     const loaderRef = useRef<HTMLDivElement | null>(null);
-
-    const paginatedData = data.slice(0, page * PAGE_SIZE);
-    const hasMore = paginatedData.length < data.length;
 
     useEffect(() => {
         if (!hasMore || loading) return;
-        const observer = new window.IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting) {
-                    setLoading(true);
-                    setTimeout(() => {
-                        setPage((p) => p + 1);
-                        setLoading(false);
-                    }, 800);
-                }
-            },
-            { root: null, rootMargin: "0px", threshold: 0.1 }
-        );
-        if (loaderRef.current) observer.observe(loaderRef.current);
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                setPage((p) => p + 1);
+            }
+        });
+
+        const el = loaderRef.current;
+        if (el) observer.observe(el);
+
         return () => {
-            if (loaderRef.current) observer.unobserve(loaderRef.current);
+            if (el) observer.unobserve(el);
         };
     }, [hasMore, loading]);
+
+    useEffect(() => {
+        const getData = async () => {
+            try {
+                setLoading(true);
+
+                const res = await fetch(`/api/news/${page}`, {
+                    method: "GET",
+                    credentials: "include",
+                });
+
+                if (!res.ok) {
+                    setHasMore(false);
+                    return;
+                }
+
+                const data: ResponseDateType = await res.json();
+
+                setNewsData((prev) => [...prev, ...(data.items || [])]);
+
+                if (!data.items || data.items.length === 0) {
+                    setHasMore(false);
+                }
+
+                console.log(data);
+            } catch (e) {
+                console.error(e);
+                setHasMore(false);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        getData();
+    }, [page]);
 
     return (
         <div style={{ position: "relative" } as React.CSSProperties} className={css.block}>
             <div className={css.top_mirror}>
                 <h1 className={css.mirror_title}>News</h1>
             </div>
-            <div className={css.news_block}>
-                <motion.div className={css.news} initial={{ x: isScreen ? 225 : 0 }} animate={{ x: 0 }} transition={{ duration: 0.5, delay: 1 }}>
-                    {paginatedData.map((item, index) => (
-                        <Fragment key={index}>
-                            <New index={index} item={item} />
-                        </Fragment>
-                    ))}
-                    {loading && (
-                        <div className={css.loader}>
-                            <Image src="/images/svg/loader.svg" alt="Loading..." width={30} height={30} />
-                        </div>
-                    )}
-                    {hasMore && <div ref={loaderRef} style={{ height: 1 }} />}
-                </motion.div>
-                {isScreen && <motion.div className={css.image} initial={{ opacity: 0, filter: "blur(50px)" }} animate={{ opacity: 1, filter: "blur(0)" }} transition={{ duration: 0.3, delay: 1.5 }} />}
-            </div>
+            {!newsData?.length ? (
+                <div className={css.loader}>
+                    <Image src="/images/svg/loader.svg" alt="loader" width={48} height={48} />
+                </div>
+            ) : (
+                <div className={css.news_block}>
+                    <motion.div className={css.news} initial={{ x: isScreen ? 225 : 0 }} animate={{ x: 0 }} transition={{ duration: 0.5, delay: 1 }}>
+                        {newsData.map((item, index) => (
+                            <Fragment key={index}>
+                                <New index={index} item={item} />
+                            </Fragment>
+                        ))}
+                        {loading && (
+                            <div className={css.loader}>
+                                <Image src="/images/svg/loader.svg" alt="Loading..." width={30} height={30} />
+                            </div>
+                        )}
+                        {hasMore && <div ref={loaderRef} style={{ height: 1 }} />}
+                    </motion.div>
+                    {isScreen && <motion.div className={css.image} initial={{ opacity: 0, filter: "blur(50px)" }} animate={{ opacity: 1, filter: "blur(0)" }} transition={{ duration: 0.3, delay: 1.5 }} />}
+                </div>
+            )}
         </div>
     );
 };

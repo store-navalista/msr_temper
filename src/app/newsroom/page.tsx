@@ -1,5 +1,7 @@
 import NewsContentClient from "@/components/News";
-import { Template } from "@/components/Pages/Template/Template";
+import { NewsTemplate } from "@/components/Pages/NewsTemplate/NewsTemplate";
+import { getNewsById } from "@/services/elma/news";
+import { markdownToHtml } from "@/services/markdown";
 import { generatePageMetadata } from "@/services/seo";
 
 export async function generateMetadata() {
@@ -10,13 +12,13 @@ export async function generateMetadata() {
 }
 
 export default async function IndexPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
-    const { id: page_ID } = await searchParams;
+    const { id: news_ID } = await searchParams;
 
-    return page_ID ? (
-        <Template {...{ page_ID }} templateType="news">
-            asdas
-        </Template>
-    ) : (
-        <NewsContentClient />
-    );
+    if (!news_ID) return <NewsContentClient />;
+
+    const news = await getNewsById(news_ID);
+
+    const htmlBody = markdownToHtml(String(news?.body));
+
+    return <NewsTemplate news={{ ...news, body: htmlBody }} />;
 }
