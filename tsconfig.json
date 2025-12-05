@@ -12,7 +12,7 @@
         "moduleResolution": "Bundler",
         "resolveJsonModule": true,
         "isolatedModules": true,
-        "jsx": "preserve",
+        "jsx": "react-jsx",
         "incremental": true,
         "plugins": [
             {
@@ -23,6 +23,6 @@
             "@/*": ["./src/*"]
         }
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Pages/CLIENT/CLIENT_CABINET/components/Effects/FlyCircles/start.js"],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Pages/CLIENT/CLIENT_CABINET/components/Effects/FlyCircles/start.js", ".next/dev/types/**/*.ts"],
     "exclude": ["node_modules"]
 }

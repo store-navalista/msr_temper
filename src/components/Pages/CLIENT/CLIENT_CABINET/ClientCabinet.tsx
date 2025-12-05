@@ -62,12 +62,12 @@ export const ClientCabinet = () => {
             {!Object.keys(queryParams).length ? (
                 <Auth />
             ) : (
-                <>
+                <div>
                     <Header />
                     <Navigation {...{ activeTab, setActiveTab }} />
                     <p className={css.company}>{typeof companyData?.companies_name === "string" ? companyData.companies_name : "Company"}</p>
                     {companyData && <Tabs {...{ activeTab, companyData }} />}
-                </>
+                </div>
             )}
         </div>
     );

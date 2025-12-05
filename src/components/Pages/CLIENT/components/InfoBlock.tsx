@@ -66,17 +66,17 @@ export const InfoBlock: FC<InfoBlockProps> = ({ utn, setError, setisLoading }) =
     const VerificationStatus = () => {
         if (data.certificate_status === "Expired") {
             return (
-                <>
+                <div>
                     <p>{Content.CLIENT.Info_block.not_verified}</p>
                     <p>{Content.CLIENT.Info_block.not_verified_desc}</p>
-                </>
+                </div>
             );
         } else {
             return (
-                <>
+                <div>
                     <p>{Content.CLIENT.Info_block.verified}</p>
                     <p>{Content.CLIENT.Info_block.verified_desc}</p>
-                </>
+                </div>
             );
         }
     };

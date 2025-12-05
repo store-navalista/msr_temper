@@ -24,8 +24,8 @@ export const BurgerMenuList: FC<{ isOpen: boolean }> = ({ isOpen }) => {
     return (
         <div className={css.list}>
             <motion.ul className={css.first_block} initial="hidden" animate={isOpen ? "visible" : "hidden"} variants={leftToRightVariant}>
-                {MOBILE_MENU.first_block.map((item, index) => (
-                    <li key={index}>
+                {MOBILE_MENU.first_block.map((item) => (
+                    <li key={item}>
                         <SmartLink href={ROUTES[item as RoutesTypes]}>{Content.MenuItems[item as MenuItemTypes]}</SmartLink>
                     </li>
                 ))}

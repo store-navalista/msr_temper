@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { FC } from "react";
+import { FC } from "react";
 import css from "./NewsTemplate.module.css";
 import { NewItemType } from "@/constants/types";
 

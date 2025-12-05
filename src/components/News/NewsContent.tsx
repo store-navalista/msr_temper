@@ -115,11 +115,14 @@ export const NewsContent = () => {
             ) : (
                 <div className={css.news_block}>
                     <motion.div className={css.news} initial={{ x: isScreen ? 225 : 0 }} animate={{ x: 0 }} transition={{ duration: 0.5, delay: 1 }}>
-                        {newsData.map((item, index) => (
-                            <Fragment key={index}>
-                                <New index={index} item={item} />
-                            </Fragment>
-                        ))}
+                        {newsData.map((item, index) => {
+                            const { id } = item;
+                            return (
+                                <Fragment key={id + index}>
+                                    <New index={index} item={item} />
+                                </Fragment>
+                            );
+                        })}
                         {loading && (
                             <div className={css.loader}>
                                 <Image src="/images/svg/loader.svg" alt="Loading..." width={30} height={30} />

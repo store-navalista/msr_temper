@@ -14,6 +14,7 @@ import { NewsBlock } from "../Pages/components/NewsBlock/NewsBlock";
 import { ScrollUpButton } from "../ScrollUpButton/ScrollUpButton";
 import { useScrollStep } from "../hooks/useScrollStep";
 import css from "./PageLayout.module.css";
+import { ErrorBoundary } from "../ErrorBoundary/ErrorBoundary";
 
 type PageLayoutProps = {
     children: ReactNode;
@@ -46,19 +47,21 @@ export const PageLayout: FC<PageLayoutProps> = ({ children }) => {
     return (
         <Suspense fallback={<div>Loading...</div>}>
             <Provider store={store}>
-                <div className={css.page_layout}>
-                    <Header />
-                    {children}
-                    <AnimatePresence>
-                        {scrollStep > 0 && (
-                            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2, ease: "easeOut" }}>
-                                <ScrollUpButton />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                    {pathname !== ROUTES.NEWS && <NewsBlock />}
-                    <Footer />
-                </div>
+                <ErrorBoundary>
+                    <div className={css.page_layout}>
+                        <Header />
+                        {children}
+                        <AnimatePresence>
+                            {scrollStep > 0 && (
+                                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2, ease: "easeOut" }}>
+                                    <ScrollUpButton />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                        {pathname !== ROUTES.NEWS && <NewsBlock />}
+                        <Footer />
+                    </div>
+                </ErrorBoundary>
             </Provider>
         </Suspense>
     );

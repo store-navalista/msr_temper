@@ -9,7 +9,7 @@ const CheckDiv: FC<{ item: string; index: number }> = ({ item, index }) => {
     const { ref, animation } = useAnimateOnView("bottom", index * 0.2);
 
     return (
-        <motion.div ref={ref} key={index} className={css.card} {...animation}>
+        <motion.div ref={ref} key={item} className={css.card} {...animation}>
             <div className={css.icon}>
                 <Image src="/images/svg/double-check.svg" fill alt="check" />
             </div>
@@ -29,7 +29,7 @@ export const About = () => {
             </motion.div>
             <div className={css.cards}>
                 {Content.Home._services_block.desc_list.map((item, index) => {
-                    return <CheckDiv key={index} {...{ item, index }} />;
+                    return <CheckDiv key={item} {...{ item, index }} />;
                 })}
             </div>
         </section>

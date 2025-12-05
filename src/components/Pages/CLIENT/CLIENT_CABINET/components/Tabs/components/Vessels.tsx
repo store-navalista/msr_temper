@@ -58,7 +58,7 @@ export const Vessels: FC<{ companyData: CompanyDataType }> = ({ companyData }) =
                 const vesselId = ship.id || ship.vessel_id || ship.imo || index.toString();
 
                 return (
-                    <div key={index} className={css.row}>
+                    <div key={vesselId} className={css.row}>
                         {keys.map((v, i) => {
                             const isField = fields.includes(v);
                             if (!isField) return null;

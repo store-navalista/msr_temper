@@ -1,16 +1,16 @@
+import Content from "@/content/en.json" assert { type: "json" };
 import { motion } from "framer-motion";
+import Image from "next/image";
+import { useState } from "react";
 import { useAnimateOnView } from "../hooks/useAnimateOnView";
+import { useMatchQuery } from "../hooks/useMatchQuery";
 import { useScrollStep } from "../hooks/useScrollStep";
+import { UI } from "../UI";
+import { BurgerMenu } from "./components/BurgerMenu/BurgerMenu";
+import { ColorThemeToggle, ThemeType } from "./components/ColorThemeToggle/ColorThemeToggle";
 import { Logo } from "./components/Logo/Logo";
 import { Navigation } from "./components/Navigation/Navigation";
 import css from "./Header.module.css";
-import { useMatchQuery } from "../hooks/useMatchQuery";
-import { BurgerMenu } from "./components/BurgerMenu/BurgerMenu";
-import { UI } from "../UI";
-import Image from "next/image";
-import Content from "@/content/en.json" assert { type: "json" };
-import { ColorThemeToggle, ThemeType } from "./components/ColorThemeToggle/ColorThemeToggle";
-import { useState } from "react";
 
 export const Header = () => {
     const [theme, setTheme] = useState<ThemeType>("light");
@@ -24,7 +24,7 @@ export const Header = () => {
     };
 
     return (
-        <>
+        <div>
             {!isMatchMedia && (
                 <header className={css.header} style={{ opacity: isScrolled ? 0 : 1 }}>
                     <Logo isScrolled={isMatchMedia} />
@@ -60,6 +60,6 @@ export const Header = () => {
                     </header>
                 </motion.div>
             )}
-        </>
+        </div>
     );
 };

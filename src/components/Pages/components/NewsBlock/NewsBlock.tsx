@@ -13,10 +13,10 @@ const LoadedImage: FC<{ image_file: string }> = ({ image_file }) => {
     const [loaded, setLoaded] = useState(false);
 
     return (
-        <>
+        <div>
             {!loaded && <Image src="/images/svg/loader.svg" alt="loader" width={48} height={48} />}
-            <Image src={image_file} onLoadingComplete={() => setLoaded(true)} fill alt="news" />;
-        </>
+            <Image src={image_file} onLoad={() => setLoaded(true)} fill alt="news" />;
+        </div>
     );
 };
 
@@ -63,13 +63,13 @@ export const NewsBlock = () => {
                     modules={[Pagination]}
                     className={css.swiper}
                 >
-                    {filteredNews.map((item, index) => {
-                        const { image_file, title, href_source, create_date } = item;
+                    {filteredNews.map((item) => {
+                        const { image_file, title, create_date, id } = item;
                         const date = new Date(create_date.ts);
                         const formatted = date.toISOString().slice(0, 10);
 
                         return (
-                            <SwiperSlide key={index} className={css.slide}>
+                            <SwiperSlide key={id} className={css.slide}>
                                 <div className={css.desc}>
                                     <p className={css.text}>{title}</p>
                                     <p className={css.time}>{formatted}</p>
@@ -77,7 +77,7 @@ export const NewsBlock = () => {
                                 <div className={css.image}>
                                     <LoadedImage image_file={image_file} />
                                 </div>
-                                <SmartLink href={`/newsroom?id=${href_source}`} className={css.link} />
+                                <SmartLink href={`/newsroom?id=${id}`} className={css.link} />
                             </SwiperSlide>
                         );
                     })}

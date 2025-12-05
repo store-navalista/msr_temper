@@ -11,5 +11,5 @@ export function NoSSRWrapper({ children }: { children: React.ReactNode }) {
 
     if (!mounted) return null;
 
-    return <>{children}</>;
+    return <div>{children}</div>;
 }

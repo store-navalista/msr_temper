@@ -20,7 +20,7 @@ const Content: FC<ContentProps> = ({ content, type, children }) => {
         case "with_content":
             return content ? <MDXRemote source={content} /> : <div>No content available.</div>;
         case "without_content":
-            return <>{children}</>;
+            return <div>{children}</div>;
         default:
             return <div>No content available.</div>;
     }

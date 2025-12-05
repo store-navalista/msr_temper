@@ -7,7 +7,7 @@ import css from "./ClientPageContent.module.css";
 
 export const ClientPageContent = () => {
     return (
-        <>
+        <div>
             <h1>{Content.CLIENT.heading}</h1>
             <div data-type="wrapper" className={css.client_content}>
                 <h2>{Content.CLIENT.description}</h2>
@@ -26,6 +26,6 @@ export const ClientPageContent = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 };

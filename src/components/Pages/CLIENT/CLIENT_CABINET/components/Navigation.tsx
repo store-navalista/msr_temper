@@ -32,9 +32,9 @@ export const Navigation: FC<NavigationProps> = ({ activeTab, setActiveTab }) => 
 
     return (
         <nav className={css.nav}>
-            {buttons.map((tab: TabsType, index: number) => {
+            {buttons.map((tab: TabsType) => {
                 return (
-                    <button className={clsx(!isScreen && css.mobile_btn)} onClick={() => setActiveTab(tab)} data-active={activeTab === tab} key={index} style={{ padding: isScreen ? "6px 16px" : "0" }}>
+                    <button className={clsx(!isScreen && css.mobile_btn)} onClick={() => setActiveTab(tab)} data-active={activeTab === tab} key={tab} style={{ padding: isScreen ? "6px 16px" : "0" }}>
                         {isScreen ? Content.CLIENT.Cabinet.navigation[tab] : <SVG.CabinetTabsIcons type={tab} />}
                     </button>
                 );

@@ -21,7 +21,7 @@ export const DropdownList: FC<{ page_id: PageIDType }> = ({ page_id }) => {
     const list = MENU[page_id as MenuKeys];
 
     return (
-        <>
+        <div>
             {(list ?? []).map((page_id) => {
                 if (typeof page_id !== "string") {
                     const [title_id, serv_ids] = Object.entries(page_id).flat();
@@ -37,6 +37,6 @@ export const DropdownList: FC<{ page_id: PageIDType }> = ({ page_id }) => {
                 }
                 return <LinkItem key={page_id} size="xs" page_id={page_id as PageIDType} />;
             })}
-        </>
+        </div>
     );
 };

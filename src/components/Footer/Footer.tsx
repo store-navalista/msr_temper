@@ -47,12 +47,12 @@ const FirstBlock = () => {
         <div>
             <p>{Content.Footer.description}</p>
             <div className={css.tel}>
-                {first_block.map((item, index) => {
+                {first_block.map((item) => {
                     const { type, cnt } = item;
                     const a_type = type === "tel" ? "tel:" : "mailto:";
 
                     return (
-                        <a key={index} href={`${a_type}${SOCIAL[cnt as keyof typeof SOCIAL]}`}>
+                        <a key={cnt} href={`${a_type}${SOCIAL[cnt as keyof typeof SOCIAL]}`}>
                             {type === "tel" ? <SVG.Phone className={css.icon} /> : <SVG.Mail className={css.icon} />}
                             {SOCIAL[cnt as keyof typeof SOCIAL]}
                         </a>

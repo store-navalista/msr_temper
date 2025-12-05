@@ -10,7 +10,7 @@ export const Navigation: FC = () => {
         <nav className={css.wrapper}>
             <ul className={css.links}>
                 {menu_items.map((page_id, index) => {
-                    return <ListLink key={index} {...{ page_id, index }} />;
+                    return <ListLink key={page_id} {...{ page_id, index }} />;
                 })}
             </ul>
         </nav>
