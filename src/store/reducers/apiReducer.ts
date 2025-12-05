@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { CertificateResponse } from "./helpers/types";
+import { NewItemType } from "@/constants/types";
 
 type NewsItem = {
     id: number;
@@ -18,13 +19,19 @@ export type AuthData = {
     };
 };
 
+type ResponseNewsType = {
+    page: number;
+    limit: number;
+    items: NewItemType[];
+};
+
 export const api = createApi({
     reducerPath: "api",
     baseQuery: fetchBaseQuery({
         baseUrl: "/api",
         credentials: "include",
     }),
-    tagTypes: ["Certificate", "User"],
+    tagTypes: ["Certificate", "User", "News"],
     endpoints: (builder) => ({
         getNews: builder.query<NewsItem[], void>({
             query: () => "filter-news",
@@ -61,7 +68,11 @@ export const api = createApi({
                 body: formData,
             }),
         }),
+        getNewsPage: builder.query<ResponseNewsType, number>({
+            query: (page) => `news/${page}`,
+            providesTags: (result, error, page) => [{ type: "News", id: page }],
+        }),
     }),
 });
 
-export const { useGetNewsQuery, useLazyGenerateSVQuery, useRequestMutation, useGetVerifiedCertificateQuery, useAuthMutation, useLogoutMutation, util } = api;
+export const { useGetNewsPageQuery, useGetNewsQuery, useLazyGenerateSVQuery, useRequestMutation, useGetVerifiedCertificateQuery, useAuthMutation, useLogoutMutation, util } = api;

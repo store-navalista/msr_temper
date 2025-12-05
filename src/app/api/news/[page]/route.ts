@@ -1,7 +1,7 @@
 import axios from "axios";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest, { params }: { params: Promise<{ page: number }> }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ page: string }> }) {
     const { page } = await params;
 
     if (!page) {

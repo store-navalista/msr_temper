@@ -32,7 +32,7 @@
     },
     "TRANSF": {
         "title": "Transfer of Class",
-        "description": ""
+        "description": "Guidance and support for transferring a vessel from another classification society while preserving its compliance and operational continuity."
     },
     "SURVEYS": {
         "title": "Surveys",
@@ -41,59 +41,59 @@
 
     "TYPE_APPROVAL": {
         "title": "Type Approval",
-        "description": ""
+        "description": "Certification of products, equipment, and materials to confirm compliance with recognized maritime standards and requirements."
     },
     "STATE_COMP": {
         "title": "Statement of Compliance",
-        "description": ""
+        "description": "Issuance of Statements of Compliance verifying conformity with specific international, national, or industry standards."
     },
     "SERV_SUP": {
         "title": "Service Supplier",
-        "description": ""
+        "description": "Approval of service suppliers performing inspections, measurements, and specialized maritime services in accordance with established rules."
     },
     "REM_AU": {
         "title": "Remote Audit",
-        "description": ""
+        "description": "Efficient audit and verification procedures carried out remotely while maintaining accuracy, reliability, and regulatory compliance."
     },
     "CONV_AU": {
         "title": "Conventional Audit",
-        "description": ""
+        "description": "On-site audits ensuring adherence to mandatory maritime standards, safety protocols, and operational requirements."
     },
 
     "STAT_SURV": {
         "title": "Statutory Surveys",
-        "description": ""
+        "description": "Mandatory surveys conducted to ensure vessel compliance with international conventions and flag state regulations."
     },
     "TOW_SURV": {
         "title": "Towage Survey",
-        "description": ""
+        "description": "Inspection and certification for towage operations to confirm safety, seaworthiness, and towing readiness."
     },
     "OTHER_SURV": {
         "title": "Other Surveys",
-        "description": ""
+        "description": "Special-purpose surveys tailored to the vessel’s condition, operational needs, and regulatory obligations."
     },
     "AT_SHIP": {
         "title": "Technical Supervision at Shipyard",
-        "description": ""
+        "description": "Oversight during vessel construction, repair, and modernization to ensure compliance with technical standards and project documentation."
     },
     "IN_IND": {
         "title": "Technical Supervision in Industry",
-        "description": ""
+        "description": "Technical control and inspection of industrial facilities, equipment, and manufacturing processes in accordance with maritime standards."
     },
     "OTHER_SERVICES": {
         "title": "Other Services",
-        "description": ""
+        "description": "Additional technical and certification services supporting safe and compliant maritime operations."
     },
     "ADV_CONS": {
         "title": "Advisory and Consulting",
-        "description": ""
+        "description": "Expert consulting on maritime regulations, safety, engineering, and vessel compliance matters."
     },
     "CLIENT_VERIFY": {
         "title": "Verify Certificate",
-        "description": ""
+        "description": "Online certificate verification ensuring authenticity and validity of issued maritime documents."
     },
     "CLIENT_CABINET": {
         "title": "Client Cabinet",
-        "description": ""
+        "description": "A secure online area providing clients with access to documents, applications, and personalized service tools."
     }
 }
