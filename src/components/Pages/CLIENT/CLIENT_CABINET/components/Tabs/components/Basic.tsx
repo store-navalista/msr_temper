@@ -2,8 +2,8 @@
 
 import { SVG } from "@/components/SVG";
 import { FC } from "react";
-import { CompanyDataType } from "../../../ClientCabinet";
 import css from "../Tabs.module.css";
+import { CompanyDataType } from "./Vessels";
 
 export const Basic: FC<{ companyData: CompanyDataType }> = ({ companyData = {} }) => {
     const { companies_address, companies_email, companies_imo } = companyData;
