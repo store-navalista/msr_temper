@@ -65,22 +65,22 @@ const statusStyles = (type: "Due" | "Overdue" | "Due soon" | "Expired"): CSSProp
     switch (type) {
         case "Expired":
             return {
-                backgroundColor: "red",
+                backgroundColor: "#c20f0fff",
                 color: "white",
             };
         case "Due":
             return {
-                backgroundColor: "#afca16ff",
+                backgroundColor: "#bedb17ff",
                 color: "white",
             };
         case "Overdue":
             return {
-                backgroundColor: "red",
+                backgroundColor: "#c20f0fff",
                 color: "white",
             };
         case "Due soon":
             return {
-                backgroundColor: "green",
+                backgroundColor: "#0c694a",
                 color: "white",
             };
         default:
@@ -108,7 +108,7 @@ export const VesselTable = ({ type, data }: VesselTableProps) => {
 
     return (
         <div className={css.table_wrapper}>
-            <h3>{type === "certificates" ? "#Certificattes" : "#Surveys"}</h3>
+            <h3>{type === "certificates" ? "Certificates" : "Surveys"}</h3>
             <TableContainer component={Paper} className={css.mui_table} style={{ boxShadow: "none" }}>
                 <Table sx={tableSX} aria-label="customized table">
                     <TableHead>

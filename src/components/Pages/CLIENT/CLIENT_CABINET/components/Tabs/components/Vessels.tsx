@@ -88,6 +88,8 @@ const Vessel: FC<{ ship: VesselType; vesselId: string }> = ({ ship, vesselId }) 
         return "green";
     };
 
+    console.log(vesselId);
+
     return (
         <div key={vesselId} className={css.body}>
             <div className={css.row}>
@@ -123,8 +125,8 @@ export const Vessels: FC<{ companyData: CompanyDataType }> = ({ companyData }) =
                 <p>Review</p>
                 <p>Info</p>
             </div>
-            {vessels.map((ship, index) => {
-                const vesselId = index.toString();
+            {vessels.map((ship) => {
+                const vesselId = ship?.vessel_id.toString();
 
                 return <Vessel key={vesselId} ship={ship} vesselId={vesselId} />;
             })}

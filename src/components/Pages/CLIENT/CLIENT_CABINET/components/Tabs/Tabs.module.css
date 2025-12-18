@@ -25,7 +25,9 @@
             h3 {
                 padding: 24px 0 4px 12px;
                 text-align: left;
+                font-size: 20px;
                 border-bottom: 1px solid #8b8b8b;
+                font-family: var(--font-g-medium);
             }
             .status_cell {
                 padding: 8px 12px;
