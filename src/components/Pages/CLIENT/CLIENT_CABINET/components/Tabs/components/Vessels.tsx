@@ -18,7 +18,7 @@ type VesselType = {
     vessel_name: string;
 };
 
-type CompanyDataType = {
+export type CompanyDataType = {
     companies_address: string;
     companies_email: string;
     companies_imo: number;

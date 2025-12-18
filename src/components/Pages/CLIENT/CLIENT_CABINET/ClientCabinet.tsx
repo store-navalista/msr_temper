@@ -8,9 +8,9 @@ import css from "./ClientCabinet.module.css";
 import { Header } from "./components/Header";
 import { Navigation } from "./components/Navigation";
 import { Tabs } from "./components/Tabs/Tabs";
+import { CompanyDataType } from "./components/Tabs/components/Vessels";
 
 export type TabsType = keyof typeof Content.CLIENT.Cabinet.navigation;
-export type CompanyDataType = Record<string, string | Record<string, string>[]>;
 
 export const ClientCabinet = () => {
     const searchParams = useSearchParams();
