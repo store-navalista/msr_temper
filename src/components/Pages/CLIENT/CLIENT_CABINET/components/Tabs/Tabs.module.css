@@ -5,7 +5,7 @@
     flex-direction: column;
     margin: 0 auto;
     border-radius: 8px;
-    width: 1200px;
+    max-width: 1400px;
     border: 1px solid var(--color-primary);
     margin-top: 24px;
     overflow: hidden;
@@ -16,6 +16,19 @@
     @media screen and (max-width: 1280px) {
         width: auto;
         margin: 24px 24px 0;
+        color: #0c694a;
+    }
+    .table_wrapper {
+        h3 {
+            padding: 24px 0 4px 12px;
+            text-align: left;
+            border-bottom: 1px solid #8b8b8b;
+        }
+        .status_cell {
+            padding: 8px 12px;
+            border-radius: 24px;
+            text-wrap: nowrap;
+        }
     }
     .basic {
         display: flex;
@@ -62,50 +75,92 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        .row,
-        .header {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            p {
-                text-align: center;
-                padding: 12px 0;
-                &:not(:last-child) {
-                    border-right: 1px solid var(--border-color);
-                }
-            }
+        .mui_table {
+            padding: 24px;
         }
         .header {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr) 70px;
             border-bottom: 1px solid var(--border-color);
             p {
                 font-family: var(--font-g-medium);
                 color: var(--color-primary);
             }
-        }
-        .row {
-            &:not(:last-child) {
-                border-bottom: 1px solid var(--border-color);
+            p {
+                text-align: center;
+                padding: 12px;
+                &:not(:last-child) {
+                    border-right: 1px solid var(--border-color);
+                }
             }
-            .buttons {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                & > div {
-                    position: absolute;
+            div {
+                &:not(:last-child) {
+                    border-right: 1px solid var(--border-color);
+                }
+            }
+        }
+        .body {
+            .table {
+                h3 {
+                    text-align: left;
+                    padding: 12px 0 4px 24px;
+                    border-bottom: 1px solid #6e6e6e;
+                }
+            }
+            .row {
+                display: grid;
+                grid-template-columns: repeat(6, 1fr) 70px;
+                p {
+                    text-align: center;
+                    padding: 12px;
+                    &:not(:last-child) {
+                        border-right: 1px solid var(--border-color);
+                    }
+                }
+                border-top: 1px solid var(--border-color);
+                border-bottom: 1px solid var(--border-color);
+                div {
+                    &:not(:last-child) {
+                        border-right: 1px solid var(--border-color);
+                    }
+                }
+                .info_block {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    gap: 8px;
-                    .button {
-                        border-radius: 4px;
-                        padding: 6px 12px;
-                        font-size: 14px;
-                        color: var(--color-blue);
+                    button {
                         background-color: #fff;
-                        transition: background-color 0.3s, color 0.3s;
-                        &:hover {
-                            color: #fff;
-                            background-color: var(--color-blue);
+                        width: 100%;
+                        height: 100%;
+                        padding: 0;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 4px;
+                    }
+                }
+                .buttons {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    & > div {
+                        position: absolute;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 8px;
+                        .button {
+                            border-radius: 4px;
+                            padding: 6px 12px;
+                            font-size: 14px;
+                            color: var(--color-blue);
+                            background-color: #fff;
+                            transition: background-color 0.3s, color 0.3s;
+                            &:hover {
+                                color: #fff;
+                                background-color: var(--color-blue);
+                            }
                         }
                     }
                 }

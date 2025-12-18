@@ -20,7 +20,7 @@ export const OnlineRequest = () => {
                 <p>This downloadable Word document is the official Request Form for services provided by Mediterranean Shipping Register. It allows you to submit a formal inquiry for classification, inspection, certification, or consultancy. The form includes sections for your company information, vessel details, the type of services required, and contact data. By completing and sending it to our email address, you help us understand your needs and provide an appropriate response or quotation. Intended for shipowners, operators, managers, and shipyards, this form is the first step to initiate cooperation. Please fill it out accurately to ensure timely processing.</p>
             </div>
             <UI.Button onClick={downloadFile} colorScheme="secondary" className={css.button}>
-                <SVG.WordDoc className={css.icon} /> Download request form
+                <SVG.PdfDoc className={css.icon} /> Download request form
             </UI.Button>
         </div>
     );

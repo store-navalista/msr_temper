@@ -1,47 +1,116 @@
 "use client";
 
-import { FC, useState } from "react";
+import Image from "next/image";
+import { FC, useMemo, useState } from "react";
 import css from "../Tabs.module.css";
-import { CompanyDataType } from "../../../ClientCabinet";
-import { useLazyGenerateSVQuery } from "@/store/reducers/apiReducer";
+import { DownloadButton } from "./VesselsComponents/DownloadButton";
+import { CertificateByVesselType, SurveyByVesselType, VesselUnionDataType } from "./VesselsComponents/VesselDataType";
+import { VesselTable } from "./VesselsComponents/VesselTable";
 
-const DownloadButton: FC<{ vesselId: string }> = ({ vesselId }) => {
-    const [loading, setLoading] = useState(false);
-    const [trigger] = useLazyGenerateSVQuery();
+type VesselType = {
+    certificatesByVessel: CertificateByVesselType[];
+    flag: string;
+    imo: string;
+    port_of_registry: string;
+    surveysByVessel: SurveyByVesselType[];
+    vesse_type: string;
+    vessel_id: string;
+    vessel_name: string;
+};
 
-    const handleDownload = async () => {
-        setLoading(true);
-        try {
-            const result = await trigger(vesselId);
+type CompanyDataType = {
+    companies_address: string;
+    companies_email: string;
+    companies_imo: number;
+    companies_name: string;
+    vessels: VesselType[];
+};
 
-            if (result.data) {
-                const blob = new Blob([result.data], { type: "application/pdf" });
-                const url = window.URL.createObjectURL(blob);
-                const link = document.createElement("a");
-                link.href = url;
-                link.download = `status-report-${vesselId}.pdf`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                window.URL.revokeObjectURL(url);
+type HandlerListProps = {
+    isEmpty: boolean;
+    onOpen: () => void;
+    isOpen: boolean;
+    color?: "red" | "green" | "orange";
+};
+
+const HandlerList: FC<HandlerListProps> = ({ isEmpty, onOpen, isOpen, color }) => {
+    const imageStyle = {
+        transition: "transform 0.3s ease",
+        transform: `rotate(${isOpen ? 90 : 0}deg)`,
+    };
+
+    const colorCircle = useMemo(() => {
+        switch (color) {
+            case "green": {
+                return "/images/svg/circle-green.svg";
             }
-        } catch (error) {
-            console.error("Error downloading PDF:", error);
-        } finally {
-            setLoading(false);
+            case "orange": {
+                return "/images/svg/circle-orange.svg";
+            }
+            case "red":
+            default: {
+                return "/images/svg/circle-red.svg";
+            }
         }
+    }, [color]);
+
+    return (
+        <div className={css.info_block}>
+            {!isEmpty ? (
+                <button onClick={onOpen} className={css.info_button}>
+                    <Image src={colorCircle} width={24} height={24} alt="circle" />
+                    <Image src="/images/svg/styled-arrow.svg" width={24} height={24} alt="circle" style={imageStyle} />
+                </button>
+            ) : (
+                "-"
+            )}
+        </div>
+    );
+};
+
+const fields: (keyof Pick<VesselType, "vessel_name" | "imo" | "vesse_type" | "flag" | "port_of_registry">)[] = ["vessel_name", "imo", "vesse_type", "flag", "port_of_registry"];
+
+const Vessel: FC<{ ship: VesselType; vesselId: string }> = ({ ship, vesselId }) => {
+    const isSurveysByVessel = ship.surveysByVessel.length;
+    const isCertificatesByVessel = ship.certificatesByVessel.length;
+    const isEmpty = !isSurveysByVessel && !isCertificatesByVessel;
+    const [isOpen, setIsOpen] = useState(false);
+    const surveysByVesselStatusArr = ship.surveysByVessel.map((survey) => survey.survey_status);
+    const certificatesByVesselStatusArr = ship.certificatesByVessel.map((certificate) => certificate.cert_status);
+
+    const statusColor = () => {
+        if (surveysByVesselStatusArr.includes("Overdue") || certificatesByVesselStatusArr.includes("Expired")) {
+            return "red";
+        }
+        if (surveysByVesselStatusArr.includes("Due")) {
+            return "orange";
+        }
+        return "green";
     };
 
     return (
-        <button onClick={handleDownload} className={css.button} disabled={loading}>
-            {loading ? "Generating..." : "Generate status report"}
-        </button>
+        <div key={vesselId} className={css.body}>
+            <div className={css.row}>
+                {fields.map((v, i) => {
+                    return <p key={`${v}` + i}>{ship[v]}</p>;
+                })}
+                <div className={css.buttons}>
+                    <div>
+                        <DownloadButton vesselId={vesselId} />
+                    </div>
+                </div>
+                <HandlerList isEmpty={!!isEmpty} onOpen={() => setIsOpen(!isOpen)} isOpen={isOpen} color={statusColor()} />
+            </div>
+            <div style={{ display: isOpen ? "block" : "none" }} className={css.expandable_section}>
+                {isSurveysByVessel ? <VesselTable type="surveys" data={ship.surveysByVessel as VesselUnionDataType[]} /> : <span />}
+                {isCertificatesByVessel ? <VesselTable type="certificates" data={ship.certificatesByVessel as VesselUnionDataType[]} /> : <span />}
+            </div>
+        </div>
     );
 };
 
 export const Vessels: FC<{ companyData: CompanyDataType }> = ({ companyData }) => {
     const { vessels } = companyData;
-    const fields = ["vessel_name", "imo", "vesse_type", "flag", "port_of_registry"];
 
     return (
         <div className={css.table}>
@@ -52,25 +121,12 @@ export const Vessels: FC<{ companyData: CompanyDataType }> = ({ companyData }) =
                 <p>Flag</p>
                 <p>Port of Registry</p>
                 <p>Review</p>
+                <p>Info</p>
             </div>
-            {(vessels as Record<string, string>[]).map((ship, index) => {
-                const keys = Object.keys(ship) as Array<keyof typeof ship>;
-                const vesselId = ship.id || ship.vessel_id || ship.imo || index.toString();
+            {vessels.map((ship, index) => {
+                const vesselId = index.toString();
 
-                return (
-                    <div key={vesselId} className={css.row}>
-                        {keys.map((v, i) => {
-                            const isField = fields.includes(v);
-                            if (!isField) return null;
-                            return <p key={`${v}` + i}>{ship[v]}</p>;
-                        })}
-                        <div className={css.buttons}>
-                            <div>
-                                <DownloadButton vesselId={vesselId} />
-                            </div>
-                        </div>
-                    </div>
-                );
+                return <Vessel key={vesselId} ship={ship} vesselId={vesselId} />;
             })}
         </div>
     );
