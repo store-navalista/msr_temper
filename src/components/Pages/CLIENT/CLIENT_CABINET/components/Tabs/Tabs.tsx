@@ -24,19 +24,21 @@ export const Tabs: FC<{ activeTab: TabsType; companyData: CompanyDataType }> = (
     const [isLoader] = useState(false);
 
     return (
-        <div className={css.tabs}>
-            <p className={css.head}>{Content.CLIENT.Cabinet.navigation[activeTab]}</p>
-            {isLoader ? (
-                <div className={css.tables_loader}>
-                    <Image src="/images/svg/loader.svg" alt="loader" width={50} height={50} />
-                </div>
-            ) : (
-                <AnimatePresence mode="wait">
-                    <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
-                        <Table type={activeTab} companyData={companyData} />
-                    </motion.div>
-                </AnimatePresence>
-            )}
+        <div className={css.tabs_wrapper}>
+            <div className={css.tabs}>
+                <p className={css.head}>{Content.CLIENT.Cabinet.navigation[activeTab]}</p>
+                {isLoader ? (
+                    <div className={css.tables_loader}>
+                        <Image src="/images/svg/loader.svg" alt="loader" width={50} height={50} />
+                    </div>
+                ) : (
+                    <AnimatePresence mode="wait">
+                        <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+                            <Table type={activeTab} companyData={companyData} />
+                        </motion.div>
+                    </AnimatePresence>
+                )}
+            </div>
         </div>
     );
 };

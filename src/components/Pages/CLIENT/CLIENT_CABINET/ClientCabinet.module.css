@@ -1,4 +1,5 @@
 .cabinet {
+    overflow: hidden;
     .company {
         margin: 0 auto;
         width: fit-content;
